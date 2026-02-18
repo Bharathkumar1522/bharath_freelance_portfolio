@@ -129,20 +129,20 @@ export default function Hero() {
                             transition={{ delay: 1.2, duration: 0.8 }}
                             className="text-center max-w-4xl px-4 mb-10 flex flex-col items-center gap-6"
                         >
-                            <h2 className="text-xl md:text-3xl font-light text-white tracking-wide font-heading uppercase drop-shadow-lg">
+                            <h2 className="text-lg md:text-2xl font-light text-zinc-300 tracking-wide font-heading uppercase drop-shadow-md">
                                 {portfolioData.personal.tagline}
                             </h2>
 
-                            <p className="text-sm md:text-lg text-zinc-300 font-sans leading-relaxed tracking-wide max-w-2xl drop-shadow-md">
+                            <p className="text-sm md:text-lg text-zinc-400 font-sans leading-relaxed tracking-wide max-w-2xl drop-shadow-sm">
                                 {portfolioData.personal.description}
                             </p>
                         </motion.div>
 
                         {/* 3. System Status - Cyber Typewriter */}
-                        <div className="h-7 md:h-8 flex items-center justify-center overflow-hidden bg-black/60 backdrop-blur-md px-3 md:px-4 rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.5)] w-auto max-w-[90vw]">
-                            <p className="font-mono text-[10px] md:text-sm text-zinc-400 tracking-wider md:tracking-[0.2em] uppercase whitespace-nowrap overflow-hidden text-ellipsis">
-                                SYSTEM_STATUS :: <span className="text-white font-bold">{displayedRole}</span>
-                                <span className="animate-pulse ml-1 text-orange-400">_</span>
+                        <div className="h-7 md:h-8 flex items-center justify-center overflow-hidden bg-black/60 backdrop-blur-md px-3 md:px-4 rounded-full border border-white/5 shadow-[0_0_15px_rgba(0,0,0,0.5)] w-auto max-w-[90vw]">
+                            <p className="font-mono text-[10px] md:text-sm text-zinc-600 tracking-wider md:tracking-[0.2em] uppercase whitespace-nowrap overflow-hidden text-ellipsis">
+                                SYSTEM_STATUS :: <span className="text-zinc-300 font-bold">{displayedRole}</span>
+                                <span className="animate-pulse ml-1 text-orange-500/80">_</span>
                             </p>
                         </div>
 
