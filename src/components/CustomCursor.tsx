@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export default function CustomCursor({
@@ -9,10 +9,21 @@ export default function CustomCursor({
     size?: number;
 }) {
     const cursorRef = useRef<HTMLDivElement>(null);
-    const followerRef = useRef<HTMLDivElement>(null);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
 
     useEffect(() => {
+        // Detect touch device
+        const touchCheck = window.matchMedia("(pointer: coarse)");
+        setIsTouchDevice(touchCheck.matches);
+
+        // Optional: Listen for changes (e.g., hybrid devices)
+        const handler = (e: MediaQueryListEvent) => setIsTouchDevice(e.matches);
+        touchCheck.addEventListener("change", handler);
+
+        if (touchCheck.matches) return () => touchCheck.removeEventListener("change", handler);
+
         const cursor = cursorRef.current;
+        if (!cursor) return () => touchCheck.removeEventListener("change", handler);
 
         // Initial hide
         gsap.set(cursor, { xPercent: -50, yPercent: -50, opacity: 0 });
@@ -41,8 +52,11 @@ export default function CustomCursor({
         return () => {
             window.removeEventListener("mousemove", onMouseMove);
             window.removeEventListener("mouseleave", onMouseLeave);
+            touchCheck.removeEventListener("change", handler);
         };
     }, []);
+
+    if (isTouchDevice) return null;
 
     return (
         <>
