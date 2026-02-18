@@ -77,7 +77,7 @@ export default function Hero() {
 
 
             {/* --- Content Layer --- */}
-            <div className="relative z-20 flex h-full w-full flex-col items-center justify-center pointer-events-none pt-0 pb-24 md:pb-32">
+            <div className="relative z-20 flex h-full w-full flex-col items-center justify-center pointer-events-none pt-6 md:pt-12 pb-24 md:pb-32">
                 <div className="container mx-auto px-4 flex flex-col items-center justify-center h-full max-w-5xl">
 
                     {/* Status Pill */}
