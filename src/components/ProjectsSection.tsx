@@ -121,8 +121,23 @@ export default function ProjectsSection() {
                 </div>
             </div>
 
-            {/* Deep Space Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-900/10 via-black to-black pointer-events-none z-0" />
+            {/* Deep Space Background - Enhanced */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/05 via-black to-black pointer-events-none z-0" />
+
+            {/* --- Tech Frame Decorations --- */}
+            <div className="absolute inset-y-0 left-0 w-24 hidden md:flex flex-col items-center justify-between py-32 z-10 pointer-events-none select-none opacity-20">
+                <div className="h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent relative">
+                    <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-1 h-8 bg-orange-500/50 blur-[2px]" />
+                    <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-1 h-8 bg-orange-500/50 blur-[2px]" />
+                </div>
+            </div>
+
+            <div className="absolute inset-y-0 right-0 w-24 hidden md:flex flex-col items-center justify-between py-32 z-10 pointer-events-none select-none opacity-20">
+                <div className="h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent relative border-r border-dashed border-white/10" />
+                <div className="absolute top-1/3 right-8 font-mono text-[10px] rotate-90 text-white/40 tracking-[0.3em]">
+                    PROJECT_ARCHIVE
+                </div>
+            </div>
 
             <div className="container mx-auto px-4 mb-24 text-center relative z-10">
                 <h2 className="text-[12vw] md:text-8xl font-black font-heading text-white/5 uppercase tracking-tighter select-none absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
