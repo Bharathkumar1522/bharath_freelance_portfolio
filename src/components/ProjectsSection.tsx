@@ -138,13 +138,14 @@ export default function ProjectsSection() {
 
             <div ref={container} className="w-full px-4 md:px-0 relative z-10">
                 {projects.map((project, i) => {
-                    const targetScale = 1 - (projects.length - i) * 0.05;
+                    const targetScale = 1 - (projects.length - 1 - i) * 0.05;
+                    const rangeStart = i * (1 / projects.length);
                     return (
                         <ProjectCard
                             key={project.id}
                             index={i}
                             project={project}
-                            range={[i * 0.25, 1]}
+                            range={[rangeStart, 1]}
                             targetScale={targetScale}
                             progress={scrollYProgress}
                         />

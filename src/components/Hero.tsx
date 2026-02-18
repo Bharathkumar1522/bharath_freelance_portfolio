@@ -150,42 +150,48 @@ export default function Hero() {
 
                 </div>
 
-                {/* --- CTAs & Scroll Hint --- */}
+                {/* --- Scroll Indicator --- */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={!isLoading ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    className="absolute bottom-8 md:bottom-12 left-0 right-0 flex flex-col items-center gap-6 pointer-events-none z-30"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2, duration: 1 }}
+                    className="absolute bottom-8 md:bottom-12 flex flex-col items-center gap-4 pointer-events-auto z-30"
                 >
-                    <div className="pointer-events-auto">
-                        <MagneticButton onClick={handleScrollToWork}>
-                            <div className="group relative flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300">
-                                <span className="text-sm font-bold font-heading uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
-                                    Explore Works
-                                </span>
-                                <ArrowRight className="w-4 h-4 text-white group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
-                                <div className="absolute inset-0 rounded-full bg-orange-500/10 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-                            </div>
-                        </MagneticButton>
-                    </div>
+                    <MagneticButton onClick={handleScrollToWork}>
+                        <div className="group relative flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300">
+                            <span className="text-sm font-bold font-heading uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
+                                Explore Works
+                            </span>
+                            <ArrowRight className="w-4 h-4 text-white group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
 
-                    {/* Scroll Mouse Animation */}
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="w-[1.5px] h-10 md:h-12 bg-white/10 relative overflow-hidden rounded-full">
-                            <motion.div
-                                initial={{ top: "-100%" }}
-                                animate={{ top: "100%" }}
-                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute w-full h-1/2 bg-gradient-to-b from-transparent via-orange-500 to-transparent"
-                            />
+                            {/* Glow */}
+                            <div className="absolute inset-0 rounded-full bg-orange-500/10 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
-                        <span className="text-[9px] md:text-[10px] font-mono text-white/30 uppercase tracking-[0.4em] animate-pulse">
-                            Scroll
-                        </span>
-                    </div>
+                    </MagneticButton>
+
+                    <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] animate-pulse">
+                        Scroll
+                    </span>
                 </motion.div>
             </div>
 
+            {/* Scroll Indicator - Mouse Animation */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none z-20"
+            >
+                <div className="w-[2px] h-16 bg-white/20 relative overflow-hidden rounded-full">
+                    <motion.div
+                        initial={{ top: "-50%" }}
+                        animate={{ top: "100%" }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                        className="absolute w-full h-1/2 bg-gradient-to-b from-transparent via-orange-500 to-transparent"
+                    />
+                </div>
+                <span className="text-xs font-mono uppercase tracking-[0.3em] text-white/90 drop-shadow-md animate-pulse">Scroll</span>
+            </motion.div>
 
         </section>
     );
