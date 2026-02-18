@@ -22,22 +22,37 @@ export default function ContactSection() {
         setSubmitStatus("idle");
 
         try {
+            // Explicitly initialize with public key
+            emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "");
+
             await emailjs.sendForm(
                 process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
                 process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
-                formRef.current || "",
+                formRef.current!,
                 process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ""
             );
+
             setSubmitStatus("success");
             setFormState({ name: "", email: "", message: "" });
             // Reset success message after 5 seconds
             setTimeout(() => setSubmitStatus("idle"), 5000);
-        } catch (error) {
+        } catch (error: any) {
             console.error("EmailJS Error:", error);
             setSubmitStatus("error");
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const sendViaGmail = () => {
+        const subject = encodeURIComponent(`Project Inquiry from ${formState.name}`);
+        const body = encodeURIComponent(
+            `Name: ${formState.name}\n` +
+            `Email: ${formState.email}\n\n` +
+            `Message:\n${formState.message}`
+        );
+        const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${portfolioData.personal.email}&su=${subject}&body=${body}`;
+        window.open(mailtoLink, "_blank");
     };
 
     return (
@@ -168,9 +183,19 @@ export default function ContactSection() {
                             </div>
                         )}
                         {submitStatus === "error" && (
-                            <div className="flex items-center gap-2 text-red-500 bg-red-500/10 p-4 rounded-xl border border-red-500/20">
-                                <AlertCircle size={20} />
-                                <span className="font-mono text-sm">Transmission failed. Please verify connection or keys.</span>
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-2 text-red-500 bg-red-500/10 p-4 rounded-xl border border-red-500/20">
+                                    <AlertCircle size={20} />
+                                    <span className="font-mono text-sm">Transmission failed. Please verify connection or use fallback.</span>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={sendViaGmail}
+                                    className="w-full py-3 px-4 bg-zinc-900 border border-zinc-800 text-white rounded-xl font-mono text-xs uppercase tracking-widest hover:bg-zinc-800 hover:border-orange-500/50 transition-all flex items-center justify-center gap-2"
+                                >
+                                    <Mail size={14} className="text-orange-500" />
+                                    <span>Send via Gmail Instead</span>
+                                </button>
                             </div>
                         )}
 
