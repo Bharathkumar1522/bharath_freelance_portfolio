@@ -1,0 +1,22 @@
+
+> app@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.2s
+  Running TypeScript ...
+Failed to compile.
+
+./src/components/SmoothScrolling.tsx:25:7
+Type error: Object literal may only specify known properties, and 'direction' does not exist in type 'LenisOptions'.
+
+[0m [90m 23 |[39m       duration[33m:[39m [35m1.2[39m[33m,[39m
+ [90m 24 |[39m       easing[33m:[39m (t) [33m=>[39m [33mMath[39m[33m.[39mmin([35m1[39m[33m,[39m [35m1.001[39m [33m-[39m [33mMath[39m[33m.[39mpow([35m2[39m[33m,[39m [33m-[39m[35m10[39m [33m*[39m t))[33m,[39m 
+[31m[1m>[22m[39m[90m 25 |[39m       direction[33m:[39m [32m"vertical"[39m[33m,[39m
+ [90m    |[39m       [31m[1m^[22m[39m
+ [90m 26 |[39m       gestureDirection[33m:[39m [32m"vertical"[39m[33m,[39m
+ [90m 27 |[39m       smoothWheel[33m:[39m [36mtrue[39m[33m,[39m
+ [90m 28 |[39m       touchMultiplier[33m:[39m [35m2[39m[33m,[39m[0m
+Next.js build worker exited with code: 1 and signal: null
