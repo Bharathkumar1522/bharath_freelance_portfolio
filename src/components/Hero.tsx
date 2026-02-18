@@ -77,8 +77,8 @@ export default function Hero() {
 
 
             {/* --- Content Layer --- */}
-            <div className="relative z-20 flex h-full w-full flex-col items-center justify-start pointer-events-none pt-24 md:pt-32">
-                <div className="container mx-auto px-4 flex flex-col items-center justify-start h-full">
+            <div className="relative z-20 flex h-full w-full flex-col items-center justify-center pointer-events-none pt-12 md:pt-20">
+                <div className="container mx-auto px-4 flex flex-col items-center justify-center h-full max-w-5xl">
 
                     {/* Status Pill */}
                     <motion.div
@@ -101,8 +101,8 @@ export default function Hero() {
                     <motion.div style={{ y: yText, opacity }} className="flex flex-col items-center w-full z-20">
 
                         {/* 1. Name - Massive & Tight */}
-                        <div className="relative mb-2">
-                            <h1 className="text-[12vw] md:text-[10vw] leading-[0.85] font-black font-heading tracking-tighter text-white select-none pointer-events-auto mix-blend-difference">
+                        <div className="relative mb-1 md:mb-2">
+                            <h1 className="text-6xl sm:text-7xl md:text-[10vw] leading-[0.85] font-black font-heading tracking-tighter text-white select-none pointer-events-auto mix-blend-difference">
                                 <ScrambleText
                                     text="BHARATH"
                                     className="block relative z-10"
@@ -139,8 +139,8 @@ export default function Hero() {
                         </motion.div>
 
                         {/* 3. System Status - Cyber Typewriter */}
-                        <div className="h-8 flex items-center justify-center overflow-hidden bg-black/60 backdrop-blur-md px-4 rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                            <p className="font-mono text-xs md:text-sm text-zinc-400 tracking-[0.2em] uppercase">
+                        <div className="h-7 md:h-8 flex items-center justify-center overflow-hidden bg-black/60 backdrop-blur-md px-3 md:px-4 rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            <p className="font-mono text-[10px] md:text-sm text-zinc-400 tracking-[0.2em] uppercase">
                                 SYSTEM_STATUS :: <span className="text-white font-bold">{displayedRole}</span>
                                 <span className="animate-pulse ml-1 text-orange-400">_</span>
                             </p>
