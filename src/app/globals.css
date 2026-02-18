@@ -70,9 +70,16 @@
     --ring: 16 100% 60%;
   }
 
+  html {
+    background-color: #000000;
+    overscroll-behavior-y: none;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-exo2), ui-monospace, sans-serif;
+    background-color: #000000;
+    /* Ensure body is also black */
   }
 
   h1,

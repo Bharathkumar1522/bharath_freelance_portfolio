@@ -11,6 +11,11 @@ import { PreloaderProvider } from "@/context/PreloaderContext";
 const rajdhani = Rajdhani({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: "--font-rajdhani" });
 const exo2 = Exo_2({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"], variable: "--font-exo2" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+export const viewport = {
+  themeColor: "#000000",
+  viewportFit: "cover",
+};
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bharath-portfolio.vercel.app'),

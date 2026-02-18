@@ -60,7 +60,7 @@ export default function Hero() {
     };
 
     return (
-        <section id="hero" ref={container} className="relative h-screen w-full overflow-hidden bg-transparent text-white perspective-1000">
+        <section id="hero" ref={container} className="relative h-[100dvh] w-full overflow-hidden bg-transparent text-white perspective-1000">
 
             {/* --- Tech Accents Layer --- */}
             <div className="absolute inset-x-4 top-24 bottom-10 border-x border-white/10 pointer-events-none select-none z-10 md:inset-x-12">
@@ -174,24 +174,6 @@ export default function Hero() {
                     </span>
                 </motion.div>
             </div>
-
-            {/* Scroll Indicator - Mouse Animation */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none z-20"
-            >
-                <div className="w-[2px] h-16 bg-white/20 relative overflow-hidden rounded-full">
-                    <motion.div
-                        initial={{ top: "-50%" }}
-                        animate={{ top: "100%" }}
-                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-full h-1/2 bg-gradient-to-b from-transparent via-orange-500 to-transparent"
-                    />
-                </div>
-                <span className="text-xs font-mono uppercase tracking-[0.3em] text-white/90 drop-shadow-md animate-pulse">Scroll</span>
-            </motion.div>
 
         </section>
     );
