@@ -121,23 +121,39 @@ export default function ProjectsSection() {
                 </div>
             </div>
 
-            {/* Deep Space Background - Enhanced */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/05 via-black to-black pointer-events-none z-0" />
+            {/* Deep Space Background - High Intensity Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/30 via-orange-500/5 to-black pointer-events-none z-0" />
 
             {/* --- Tech Frame Decorations --- */}
-            <div className="absolute inset-y-0 left-0 w-24 hidden md:flex flex-col items-center justify-between py-32 z-10 pointer-events-none select-none opacity-20">
-                <div className="h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent relative">
-                    <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-1 h-8 bg-orange-500/50 blur-[2px]" />
-                    <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-1 h-8 bg-orange-500/50 blur-[2px]" />
+            {/* Left Side Frame */}
+            <div className="absolute inset-y-0 left-2 md:left-6 w-12 flex flex-col items-center justify-between py-48 z-10 pointer-events-none select-none">
+                <div className="h-full w-[1.5px] md:w-[2px] bg-gradient-to-b from-transparent via-orange-500/80 to-transparent relative shadow-[0_0_15px_rgba(255,107,53,0.4)]">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 md:w-3 h-2 md:h-3 border md:border-2 border-orange-500 rotate-45 bg-black" />
+                    <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-4 md:w-6 h-[1.5px] md:h-[2px] bg-orange-500 shadow-[0_0_10px_#ff6b35]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-1 h-24 md:h-32 bg-orange-500 blur-[1px] shadow-[0_0_15px_#ff6b35]" />
+                    <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-4 md:w-6 h-[1.5px] md:h-[2px] bg-orange-500 shadow-[0_0_10px_#ff6b35]" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 md:w-3 h-2 md:h-3 border md:border-2 border-orange-500 rotate-45 bg-black" />
+                </div>
+                {/* Hide label on very small screens to avoid crowding */}
+                <div className="absolute top-1/2 -left-6 font-mono text-[8px] md:text-[10px] -rotate-90 text-orange-500 font-bold tracking-[0.5em] hidden sm:block drop-shadow-[0_0_8px_rgba(255,107,53,0.6)]">
+                    COORD_DATA_V90
                 </div>
             </div>
 
-            <div className="absolute inset-y-0 right-0 w-24 hidden md:flex flex-col items-center justify-between py-32 z-10 pointer-events-none select-none opacity-20">
-                <div className="h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent relative border-r border-dashed border-white/10" />
-                <div className="absolute top-1/3 right-8 font-mono text-[10px] rotate-90 text-white/40 tracking-[0.3em]">
-                    PROJECT_ARCHIVE
+            {/* Right Side Frame */}
+            <div className="absolute inset-y-0 right-2 md:right-6 w-12 flex flex-col items-center justify-between py-48 z-10 pointer-events-none select-none">
+                <div className="h-full w-[1.5px] md:w-[2px] bg-gradient-to-b from-transparent via-orange-500/80 to-transparent relative border-r md:border-r-2 border-dashed border-orange-500/40 shadow-[0_0_15px_rgba(255,107,53,0.3)]">
+                    <div className="absolute top-1/3 right-0 w-8 md:w-10 h-[1.5px] md:h-[2px] bg-orange-500 shadow-[0_0_8px_#ff6b35]" />
+                    <div className="absolute top-2/3 right-0 w-10 md:w-14 h-[1.5px] md:h-[2px] bg-orange-500 shadow-[0_0_8px_#ff6b35]" />
+                </div>
+                {/* Hide label on very small screens */}
+                <div className="absolute top-1/3 right-8 md:right-10 font-mono text-[9px] md:text-[11px] rotate-90 text-orange-400 font-bold tracking-[0.4em] whitespace-nowrap hidden sm:block drop-shadow-[0_0_8px_#ff6b35]">
+                    SYSTEM_STABLE_V90
                 </div>
             </div>
+
+            {/* Subtle Grid Overlay */}
+            <div className="absolute inset-0 bg-[radial-gradient(#ff6b3520_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0" />
 
             <div className="container mx-auto px-4 mb-24 text-center relative z-10">
                 <h2 className="text-[12vw] md:text-8xl font-black font-heading text-white/5 uppercase tracking-tighter select-none absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
