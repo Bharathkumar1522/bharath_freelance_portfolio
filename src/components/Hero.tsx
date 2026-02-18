@@ -127,7 +127,7 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={!isLoading ? { opacity: 1, y: 0 } : {}}
                             transition={{ delay: 1.2, duration: 0.8 }}
-                            className="text-center max-w-4xl px-4 mb-6 flex flex-col items-center gap-3"
+                            className="text-center max-w-4xl px-4 mb-10 flex flex-col items-center gap-6"
                         >
                             <h2 className="text-xl md:text-3xl font-light text-white tracking-wide font-heading uppercase drop-shadow-lg">
                                 {portfolioData.personal.tagline}
@@ -155,7 +155,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2, duration: 1 }}
-                    className="absolute bottom-8 md:bottom-12 flex flex-col items-center gap-4 pointer-events-auto z-30"
+                    className="absolute bottom-16 md:bottom-24 flex flex-col items-center gap-4 pointer-events-auto z-30"
                 >
                     <MagneticButton onClick={handleScrollToWork}>
                         <div className="group relative flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300">
