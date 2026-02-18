@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         hostname: 'forage-uploads-prod.s3.amazonaws.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.gravatar.com',
+        port: '',
+      },
     ],
   },
 };
