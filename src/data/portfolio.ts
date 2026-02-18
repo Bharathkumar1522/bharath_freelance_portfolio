@@ -177,7 +177,7 @@ export const portfolioData = {
             role: "Makeup Artist",
             company: "The Magic Touch",
             quote: "An absolute stunning portfolio. Bharath captured the essence of my artistry perfectly. The layout is elegant, and my clients love how easy it is to book appointments.",
-            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
+            image: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
         },
         {
             id: 2,
@@ -185,7 +185,7 @@ export const portfolioData = {
             role: "Founder",
             company: "Hetu Pathways",
             quote: "Professional, responsive, and skilled. The educational consultancy platform he built has streamlined our student counseling process significantly.",
-            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
+            image: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
         },
         {
             id: 3,
@@ -193,7 +193,7 @@ export const portfolioData = {
             role: "Founder",
             company: "Guggila Global Edu",
             quote: "We needed a corporate site that builds trust, and Bharath delivered. The user experience is flawless, and we've seen a noticeable increase in inquiries.",
-            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
+            image: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
         },
         {
             id: 4,
@@ -201,7 +201,7 @@ export const portfolioData = {
             role: "Founder",
             company: "Vivitaz Healthcare",
             quote: "A robust and secure platform for our healthcare services. Bharath's technical expertise ensured everything runs smoothly and reliably.",
-            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
+            image: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
         }
     ]
 };
