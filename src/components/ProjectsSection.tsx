@@ -41,9 +41,9 @@ function ProjectCard({
             <motion.div
                 style={{
                     scale,
-                    top: `calc(2vh + ${index * 20}px)`,
+                    top: `calc(-5vh + ${index * 25}px)`,
                 }}
-                className="relative flex flex-col md:flex-row w-full max-w-7xl h-[75vh] md:h-[650px] bg-[#121212] border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.8)] backdrop-blur-md origin-top"
+                className="relative flex flex-col md:flex-row w-full max-w-7xl  h-[70vh] md:h-[600px] bg-zinc-900 border border-white/15 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-sm origin-top"
             >
                 {/* Left Content */}
                 <div className="flex flex-col justify-between p-8 md:p-12 md:w-2/5 h-full relative z-20">
@@ -136,16 +136,15 @@ export default function ProjectsSection() {
                 </p>
             </div>
 
-            <div ref={container} className="w-full px-4 md:px-0 relative z-10 flex flex-col gap-0 items-center">
+            <div ref={container} className="w-full px-4 md:px-0 relative z-10">
                 {projects.map((project, i) => {
-                    // Gradual scaling: last card shouldn't scale, previous cards scale down slightly more
-                    const targetScale = 1 - (projects.length - 1 - i) * 0.05;
+                    const targetScale = 1 - (projects.length - i) * 0.05;
                     return (
                         <ProjectCard
                             key={project.id}
                             index={i}
                             project={project}
-                            range={[i * 0.15, 1]}
+                            range={[i * 0.25, 1]}
                             targetScale={targetScale}
                             progress={scrollYProgress}
                         />
