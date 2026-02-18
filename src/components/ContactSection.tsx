@@ -1,26 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import MagneticButton from "./MagneticButton";
-import { Send, Mail, MapPin, Terminal, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Send, Mail, MapPin, Terminal, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
+import emailjs from "@emailjs/browser";
 
 export default function ContactSection() {
+    const formRef = useRef<HTMLFormElement>(null);
     const [formState, setFormState] = useState({
         name: "",
         email: "",
         message: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate network request
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        setIsSubmitting(false);
-        alert("Message sent successfully! I'll get back to you soon.");
-        setFormState({ name: "", email: "", message: "" });
+        setSubmitStatus("idle");
+
+        try {
+            await emailjs.sendForm(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
+                formRef.current || "",
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ""
+            );
+            setSubmitStatus("success");
+            setFormState({ name: "", email: "", message: "" });
+            // Reset success message after 5 seconds
+            setTimeout(() => setSubmitStatus("idle"), 5000);
+        } catch (error) {
+            console.error("EmailJS Error:", error);
+            setSubmitStatus("error");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -72,7 +89,7 @@ export default function ContactSection() {
 
                 {/* Right Panel: The Premium Form */}
                 <div className="w-full lg:w-1/2">
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
 
                         {/* Name Field */}
                         <div className="group">
@@ -142,6 +159,20 @@ export default function ContactSection() {
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                             </button>
                         </div>
+
+                        {/* Status Messages */}
+                        {submitStatus === "success" && (
+                            <div className="flex items-center gap-2 text-green-500 bg-green-500/10 p-4 rounded-xl border border-green-500/20">
+                                <CheckCircle2 size={20} />
+                                <span className="font-mono text-sm">Message transmitted successfully. I'll respond shortly.</span>
+                            </div>
+                        )}
+                        {submitStatus === "error" && (
+                            <div className="flex items-center gap-2 text-red-500 bg-red-500/10 p-4 rounded-xl border border-red-500/20">
+                                <AlertCircle size={20} />
+                                <span className="font-mono text-sm">Transmission failed. Please verify connection or keys.</span>
+                            </div>
+                        )}
 
                     </form>
                 </div>

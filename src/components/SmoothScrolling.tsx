@@ -21,12 +21,12 @@ export default function SmoothScrolling({
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis with heavier, fluid feel
+    // Initialize Lenis with lighter, responsive feel
     const lenisInstance = new Lenis({
-      duration: 2.5, // Super heavy/tight
+      duration: 1.7, // Slightly increased from 1.5 for better control
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 1.5,
-      wheelMultiplier: 0.3, // Very slow/cinematic
+      touchMultiplier: 2, // Increased for mobile responsiveness
+      wheelMultiplier: 0.8, // Increased from 0.3 for faster scroll speed
     });
 
     setLenis(lenisInstance);

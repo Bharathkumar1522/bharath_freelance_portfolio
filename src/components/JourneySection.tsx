@@ -72,7 +72,7 @@ export default function JourneySection() {
                 </div>
 
                 {/* Central Spine */}
-                <div className="absolute left-4 md:left-1/2 top-48 bottom-0 w-[2px] md:-translate-x-1/2 bg-white/5">
+                <div className="absolute left-[2rem] md:left-1/2 top-48 bottom-0 w-[2px] md:-translate-x-1/2 bg-white/5">
                     <div ref={lineRef} className="absolute top-0 left-0 w-full bg-gradient-to-b from-orange-500 via-amber-500 to-transparent h-full scale-y-0 origin-top" />
                 </div>
 

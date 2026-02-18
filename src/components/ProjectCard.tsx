@@ -2,6 +2,7 @@
 
 
 
+import Image from "next/image";
 import MagneticButton from "./MagneticButton";
 import { ArrowUpRight } from "lucide-react";
 
@@ -12,6 +13,7 @@ interface Project {
     description: string;
     year: string;
     image: string;
+    link: string;
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -32,9 +34,11 @@ export default function ProjectCard({ project }: { project: Project }) {
                     {project.description}
                 </p>
                 <div className="pt-4">
-                    <MagneticButton variant="glass" className="px-6 py-3 font-semibold">
-                        View Case Study <ArrowUpRight className="ml-2 inline-block h-5 w-5" />
-                    </MagneticButton>
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-block">
+                        <MagneticButton variant="glass" className="px-6 py-3 font-semibold">
+                            View Case Study <ArrowUpRight className="ml-2 inline-block h-5 w-5" />
+                        </MagneticButton>
+                    </a>
                 </div>
             </div>
 
@@ -44,10 +48,13 @@ export default function ProjectCard({ project }: { project: Project }) {
             {/* Image Section - 40% Width */}
             <div className="relative h-1/2 w-full md:h-full md:w-[40%] px-4 md:px-0 flex items-center">
                 <div className="relative h-[60vh] w-full overflow-hidden rounded-2xl border border-white/10 group bg-black/20 backdrop-blur-sm">
-                    <div className="absolute inset-0 bg-transparent transition-transform duration-700 group-hover:scale-105">
-                        <div
-                            className="h-full w-full bg-cover bg-center transition-all duration-700 group-hover:scale-110"
-                            style={{ backgroundImage: `url(${project.image})` }}
+                    <div className="absolute inset-0 bg-transparent transition-transform duration-700 group-hover:scale-105 will-change-transform">
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
                     </div>

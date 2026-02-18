@@ -14,17 +14,17 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mon
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bharath-portfolio.vercel.app'),
-  title: "Bharath | Frontend Freelancer & Creative Developer",
-  description: "High-performance creative portfolio demonstrating advanced frontend capabilities. Specializing in React, Next.js, and interactive web experiences.",
-  keywords: ["Frontend Developer", "Freelance", "React", "Next.js", "Creative Developer", "Web Design", "Interactive Websites"],
+  title: "Bharath | High-Converting Websites for Creators & Businesses",
+  description: "Specializing in high-performance landing pages and portfolios that drive results for creators, artists, and business owners. Built with React and Next.js.",
+  keywords: ["Freelance Web Developer", "Business Landing Pages", "Creator Portfolios", "Conversion Optimization", "React Developer", "Next.js Portfolio"],
   authors: [{ name: "Bharath Kumar" }],
   creator: "Bharath Kumar",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://bharath-portfolio.vercel.app/", // Placeholder URL
-    title: "Bharath | Frontend Freelancer & Creative Developer",
-    description: "High-performance creative portfolio demonstrating advanced frontend capabilities.",
+    title: "Bharath | High-Converting Websites for Creators & Businesses",
+    description: "I build websites that tell your story and drive results. Dedicated to help creators and businesses stand out.",
     siteName: "Bharath Portfolio",
     images: [
       {
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bharath | Frontend Freelancer & Creative Developer",
-    description: "High-performance creative portfolio demonstrating advanced frontend capabilities.",
+    title: "Bharath | High-Converting Websites for Creators & Businesses",
+    description: "I build websites that tell your story and drive results. Dedicated to help creators and businesses stand out.",
     images: ["/og-image.png"],
     creator: "@bharath_codes", // Placeholder handle
   },

@@ -109,10 +109,10 @@ export default function ProjectsSection() {
     });
 
     return (
-        <section id="work" className="relative w-full bg-black pt-32 pb-24 z-10 rounded-t-[3rem] mt-[-100vh]">
+        <section id="work" className="relative w-full bg-black pt-32 pb-24 z-10 rounded-t-[2rem] md:rounded-t-[3rem] mt-0 md:mt-[-100vh]">
             {/* Event Horizon Transition */}
             <div className="absolute top-0 left-0 w-full transform -translate-y-[98%] overflow-hidden pointer-events-none z-20">
-                <div className="relative w-full h-[15vh] md:h-[25vh]">
+                <div className="relative w-full h-[10vh] md:h-[25vh]">
                     <svg className="absolute bottom-0 w-full h-full fill-black drop-shadow-[0_-20px_40px_rgba(255,107,53,0.4)]" viewBox="0 0 1440 320" preserveAspectRatio="none">
                         <path d="M0,320 L1440,320 L1440,160 C1000,320 440,320 0,160 Z" />
                     </svg>

@@ -3,9 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useLenis } from "@/components/SmoothScrolling";
 import { usePreloader } from "@/context/PreloaderContext";
 import { ScrambleText } from "@/components/ui/TextScramble";
+
+import { portfolioData } from "@/data/portfolio";
 
 const ROLES = ["Frontend Specialist", "Creative Developer", "UI/UX Engineer", "React Ecosystem Expert"];
 
@@ -25,8 +28,10 @@ export default function Hero() {
     const [displayedRole, setDisplayedRole] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
 
+    const isInView = useInView(container, { margin: "-100px" });
+
     useEffect(() => {
-        if (isLoading) return; // Wait for loader
+        if (isLoading || !isInView) return; // Wait for loader and visibility
 
         const currentRole = ROLES[roleIndex];
         const typeSpeed = isDeleting ? 50 : 100;
@@ -45,8 +50,14 @@ export default function Hero() {
         }, typeSpeed);
 
         return () => clearTimeout(timer);
-    }, [displayedRole, isDeleting, roleIndex]);
+    }, [displayedRole, isDeleting, roleIndex, isLoading, isInView]);
 
+
+    const lenis = useLenis();
+
+    const handleScrollToWork = () => {
+        lenis?.scrollTo("#work", { duration: 1.5 });
+    };
 
     return (
         <section id="hero" ref={container} className="relative h-screen w-full overflow-hidden bg-transparent text-white perspective-1000">
@@ -66,15 +77,15 @@ export default function Hero() {
 
 
             {/* --- Content Layer --- */}
-            <div className="relative z-20 flex h-full w-full flex-col items-center justify-center pointer-events-none">
-                <div className="container mx-auto px-4 flex flex-col items-center justify-center h-full">
+            <div className="relative z-20 flex h-full w-full flex-col items-center justify-start pointer-events-none pt-24 md:pt-32">
+                <div className="container mx-auto px-4 flex flex-col items-center justify-start h-full">
 
                     {/* Status Pill */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.8 }}
-                        className="mb-8 pointer-events-auto"
+                        className="mb-4 pointer-events-auto"
                     >
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_0_15px_-3px_rgba(255,255,255,0.1)] hover:bg-white/10 transition-colors cursor-default group">
                             <span className="relative flex h-2 w-2">
@@ -91,7 +102,7 @@ export default function Hero() {
 
                         {/* 1. Name - Massive & Tight */}
                         <div className="relative mb-2">
-                            <h1 className="text-[13vw] leading-[0.8] font-black font-heading tracking-tighter text-white select-none pointer-events-auto mix-blend-difference">
+                            <h1 className="text-[12vw] md:text-[10vw] leading-[0.85] font-black font-heading tracking-tighter text-white select-none pointer-events-auto mix-blend-difference">
                                 <ScrambleText
                                     text="BHARATH"
                                     className="block relative z-10"
@@ -109,23 +120,26 @@ export default function Hero() {
                             </h1>
                         </div>
 
-                        {/* 2. Value Proposition - Improved Contrast */}
-                        <motion.h2
+
+
+                        {/* 2. Value Proposition - Dynamic from Data */}
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={!isLoading ? { opacity: 1, y: 0 } : {}}
                             transition={{ delay: 1.2, duration: 0.8 }}
-                            className="text-center max-w-2xl px-4 mb-8"
+                            className="text-center max-w-4xl px-4 mb-6 flex flex-col items-center gap-3"
                         >
-                            <span className="block text-lg md:text-2xl font-light text-zinc-100 tracking-wide font-sans drop-shadow-lg">
-                                Crafting High-Performance Digital Experiences
-                            </span>
-                            <span className="block text-sm md:text-base text-orange-300 font-mono mt-2 tracking-widest uppercase drop-shadow-md">
-                                for Discerning Brands & Startups
-                            </span>
-                        </motion.h2>
+                            <h2 className="text-xl md:text-3xl font-light text-white tracking-wide font-heading uppercase drop-shadow-lg">
+                                {portfolioData.personal.tagline}
+                            </h2>
+
+                            <p className="text-sm md:text-lg text-zinc-300 font-sans leading-relaxed tracking-wide max-w-2xl drop-shadow-md">
+                                {portfolioData.personal.description}
+                            </p>
+                        </motion.div>
 
                         {/* 3. System Status - Cyber Typewriter */}
-                        <div className="h-8 flex items-center justify-center overflow-hidden bg-black/60 backdrop-blur-sm px-4 rounded-full border border-white/10">
+                        <div className="h-8 flex items-center justify-center overflow-hidden bg-black/60 backdrop-blur-md px-4 rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                             <p className="font-mono text-xs md:text-sm text-zinc-400 tracking-[0.2em] uppercase">
                                 SYSTEM_STATUS :: <span className="text-white font-bold">{displayedRole}</span>
                                 <span className="animate-pulse ml-1 text-orange-400">_</span>
@@ -134,22 +148,31 @@ export default function Hero() {
 
                     </motion.div>
 
-                    {/* CTA Button */}
-                    <motion.div
-                        style={{ y: yText }}
-                        initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-                        animate={!isLoading ? { opacity: 1, scale: 1, filter: "blur(0px)" } : {}}
-                        transition={{ delay: 1.8, duration: 0.5 }}
-                        className="mt-12 pointer-events-auto"
-                    >
-                        <MagneticButton variant="ethereal" className="group relative px-10 py-5 bg-white text-black text-xl font-bold tracking-tight overflow-hidden hover:bg-orange-500 transition-colors duration-300 will-change-transform">
-                            <span className="relative z-10 flex items-center gap-2">
-                                Explore Works
-                                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                            </span>
-                        </MagneticButton>
-                    </motion.div>
                 </div>
+
+                {/* --- Scroll Indicator --- */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2, duration: 1 }}
+                    className="absolute bottom-8 md:bottom-12 flex flex-col items-center gap-4 pointer-events-auto z-30"
+                >
+                    <MagneticButton onClick={handleScrollToWork}>
+                        <div className="group relative flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300">
+                            <span className="text-sm font-bold font-heading uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
+                                Explore Works
+                            </span>
+                            <ArrowRight className="w-4 h-4 text-white group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
+
+                            {/* Glow */}
+                            <div className="absolute inset-0 rounded-full bg-orange-500/10 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                    </MagneticButton>
+
+                    <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] animate-pulse">
+                        Scroll
+                    </span>
+                </motion.div>
             </div>
 
             {/* Scroll Indicator - Mouse Animation */}

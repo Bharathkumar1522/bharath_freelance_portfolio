@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Html, Text, Float, Stars, Trail, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
@@ -35,7 +35,7 @@ function CentralStar() {
         <group>
             {/* The Sun Core */}
             <mesh>
-                <sphereGeometry args={[1.6, 64, 64]} />
+                <sphereGeometry args={[1.6, 48, 48]} />
                 <meshStandardMaterial
                     color="#FF6B35"
                     emissive="#FF4500"
@@ -110,7 +110,7 @@ function Planet({ category, isActive, onClick, onHover, index, isVisible }: {
             >
                 {/* 1. Glass Sphere (Outer Shell) */}
                 <mesh castShadow receiveShadow>
-                    <sphereGeometry args={[0.7, 32, 32]} />
+                    <sphereGeometry args={[0.7, 24, 24]} />
                     <meshPhysicalMaterial
                         color={category.color}
                         transparent
@@ -226,6 +226,32 @@ function Scene({ categories, activeId, setActiveId, setHoveredId, isVisible }: {
     );
 }
 
+// --- Helper Components ---
+
+function ResponsiveCamera() {
+    const { camera } = useThree();
+
+    useEffect(() => {
+        const handleResize = () => {
+            const perspectiveCamera = camera as THREE.PerspectiveCamera;
+            if (window.innerWidth < 768) {
+                perspectiveCamera.position.set(0, 20, 40); // Mobile: Further out and higher
+                perspectiveCamera.fov = 45;
+            } else {
+                perspectiveCamera.position.set(0, 6, 20); // Desktop: Default
+                perspectiveCamera.fov = 40;
+            }
+            perspectiveCamera.updateProjectionMatrix();
+        };
+
+        handleResize(); // Init
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [camera]);
+
+    return null;
+}
+
 // --- Main Component ---
 
 export default function ThreeOrbitalSystem({ categories, isVisible = true }: ThreeOrbitalSystemProps) {
@@ -243,7 +269,8 @@ export default function ThreeOrbitalSystem({ categories, isVisible = true }: Thr
             onTouchStart={() => setHasInteracted(true)}
         >
 
-            <Canvas camera={{ position: [0, 6, 20], fov: 40 }} className="z-10" dpr={[1, 2]} gl={{ antialias: true, powerPreference: "high-performance" }}>
+            <Canvas className="z-10" dpr={[1, 1.5]} gl={{ antialias: true, powerPreference: "high-performance" }}>
+                <ResponsiveCamera />
                 <Scene
                     categories={categories}
                     activeId={activeCategory}
@@ -261,7 +288,7 @@ export default function ThreeOrbitalSystem({ categories, isVisible = true }: Thr
                 </div>
             )}
 
-            {/* 2D HTML Overlay for Skills List (Sidebar) */}
+            {/* Desktop Sidebar (unchanged) */}
             {activeData && (
                 <div className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 w-80 p-6 rounded-xl border z-20 backdrop-blur-xl pointer-events-none md:pointer-events-auto"
                     style={{
@@ -291,6 +318,39 @@ export default function ThreeOrbitalSystem({ categories, isVisible = true }: Thr
                                 <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
                                     <div
                                         className="h-full rounded-full shadow-[0_0_10px_currentColor] transition-all duration-1000"
+                                        style={{ width: `${skill.level}%`, backgroundColor: activeData.color }}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Mobile Bottom Sheet */}
+            {activeData && (
+                <div className="md:hidden absolute bottom-0 left-0 right-0 p-6 z-20 rounded-t-3xl backdrop-blur-xl border-t border-white/10"
+                    style={{
+                        background: `linear-gradient(to top, rgba(0,0,0,0.95), ${activeData.color}10)`,
+                        borderColor: activeData.color + '40'
+                    }}
+                >
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                            <activeData.icon className="w-5 h-5" style={{ color: activeData.color }} />
+                        </div>
+                        <h3 className="text-xl font-bold font-heading text-white uppercase tracking-wider">{activeData.label}</h3>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                        {activeData.skills.map((skill, idx) => (
+                            <div key={idx} className="bg-white/5 rounded-lg p-2 border border-white/5">
+                                <div className="flex justify-between items-center text-[10px] uppercase tracking-wider text-zinc-400 mb-1">
+                                    <span>{skill.name}</span>
+                                </div>
+                                <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
+                                    <div
+                                        className="h-full rounded-full"
                                         style={{ width: `${skill.level}%`, backgroundColor: activeData.color }}
                                     />
                                 </div>

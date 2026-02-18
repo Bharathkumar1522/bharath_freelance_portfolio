@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import SkillsSection from "@/components/SkillsSection";
+import ServicesSection from "@/components/ServicesSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import JourneySection from "@/components/JourneySection";
 import CertificationsSection from "@/components/CertificationsSection";
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="relative w-full">
       <Hero />
       <SkillsSection />
+      <ServicesSection />
       <ProjectsSection />
       <JourneySection />
       <CertificationsSection />

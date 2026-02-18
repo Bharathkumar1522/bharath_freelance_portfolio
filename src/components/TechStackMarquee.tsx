@@ -108,6 +108,7 @@ export default function TechStackMarquee() {
                     }}
                     style={{
                         width: "fit-content",
+                        willChange: "transform",
                     }}
                 >
                     {/* Double the array for seamless loop */}

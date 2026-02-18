@@ -1,17 +1,17 @@
 export const portfolioData = {
     personal: {
         name: "Bharath Kumar",
-        role: "Frontend Freelancer & Creative Developer",
-        tagline: "I build pixel-perfect, high-converting websites.",
-        description: "I am a freelance frontend developer who helps businesses turn designs into high-performance, interactive web experiences. Specializing in React, Tailwind CSS, and Framer Motion, I build websites that look stunning and load instantly. Whether it's a landing page, an e-commerce store, or a custom dashboard, I deliver code that drives results.",
+        role: "Frontend Developer & UI Designer",
+        tagline: "I Build High-Converting Websites for Creators & Businesses",
+        description: "I help ambitious creators and business owners establish a powerful online presence. No generic templates—just high-performance, custom websites that tell your story and drive real results.",
         image: "/profile.jpg",
         resumeUrl: "/My_resume_2026.pdf",
         email: "bk152002@gmail.com",
         phone: "+919963085174",
         social: {
-            linkedin: "https://www.linkedin.com/in/bharath-kumar-sagi/",
-            github: "https://github.com/Bharathkumar1522",
-            instagram: "https://www.instagram.com/webcraft_by_bharath"
+            linkedin: "https://www.linkedin.com/in/bharath-kumar-b9a380234/",
+            github: "https://github.com/bharathkumar-15",
+            instagram: "https://www.instagram.com/code_sculpter?igsh=M3c5YnFnb2Z6ZnRl"
         },
         bestSkillOn: [
             { icon: "react", name: "ReactJS" },
@@ -20,30 +20,83 @@ export const portfolioData = {
         ]
     },
 
+    skills: {
+        core: [
+            { name: "React", level: 95 },
+            { name: "TypeScript", level: 85 },
+            { name: "Tailwind CSS", level: 100 },
+            { name: "Framer Motion", level: 90 },
+            { name: "Python", level: 80 },
+            { name: "Git", level: 85 }
+        ],
+        services: [
+            { name: "Landing Pages", level: 95 },
+            { name: "Creator Portfolios", level: 90 },
+            { name: "UI/UX Design", level: 85 },
+            { name: "Performance Optimization", level: 80 }
+        ],
+        design: [
+            { name: "Figma", level: 90 },
+            { name: "Modern UI", level: 95 },
+            { name: "Responsive Layouts", level: 100 },
+            { name: "Micro-Interactions", level: 85 }
+        ]
+    },
+
     services: [
         {
             id: 0,
-            icon: "monitor",
-            title: "Landing Pages",
-            description: "High-converting, SEO-optimized landing pages. I use modern animations and psychological triggers to turn visitors into customers."
+            icon: "layout",
+            title: "Business Landing Pages",
+            description: "High-impact, conversion-focused one-page websites designed to sell your product or service. Perfect for startups and small businesses."
         },
         {
             id: 1,
-            icon: "layout",
-            title: "React Web Apps",
-            description: "Scalable Single Page Applications (SPAs) built with React and Next.js. Fast, responsive, and easy to maintain."
+            icon: "user",
+            title: "Creator Portfolios",
+            description: "Stunning personal websites for artists, designers, and content creators. Showcase your work in a way that attracts high-value clients."
         },
         {
-            id: 2,
-            icon: "shopping-bag",
-            title: "E-Commerce UI",
-            description: "Custom storefronts and product pages that look premium. Focused on user experience and smooth checkout flows."
+            id: "brand-sites",
+            icon: "globe",
+            title: "Interactive Brand Sites",
+            description: "Immersive multi-page experiences with smooth animations and storytelling elements to elevate your brand identity."
         },
         {
             id: 3,
-            icon: "figma",
-            title: "Design to Code",
-            description: "Pixel-perfect conversion of your Figma / Adobe XD designs into clean, semantic React code."
+            icon: "palette",
+            title: "UI/UX Design",
+            description: "User-centric interface design that combines aesthetics with usability. I create prototypes and design systems ready for development."
+        }
+    ],
+
+    experience: [
+        {
+            role: "Freelance Frontend Developer",
+            company: "Self-Employed",
+            duration: "2024 - Present",
+            description: "Working directly with clients to build high-performance websites. Delivered 10+ projects including e-commerce stores, corporate sites, and landing pages. Specialized in converting Figma designs to React code."
+        },
+        {
+            role: "Fullstack Development",
+            company: "NxtWave CCBP 4.0 Academy",
+            duration: "2023 - 2025",
+            description: "Intensive training in modern web technologies. Mastered the MERN stack and Python, building multiple production-ready applications."
+        },
+        {
+            role: "Frontend Developer Intern",
+            company: "GrapplTech",
+            duration: "Jun 2024 - Jul 2024",
+            description: "Collaborated with the design team to revamp the company's landing page. Implemented complex animations and optimized valid lead conversion flow."
+        }
+    ],
+
+    education: [
+        {
+            degree: "BSC Computer Science",
+            institution: "Sdhr Degree College",
+            period: "2019 - 2022",
+            description: "Strong foundation in computer science principles, database management, and programming logic."
         }
     ],
 
@@ -104,68 +157,6 @@ export const portfolioData = {
         }
     ],
 
-    skills: {
-        core: [
-            { name: "React", level: 95 },
-            { name: "Next.js", level: 90 },
-            { name: "TypeScript", level: 85 },
-            { name: "Tailwind CSS", level: 100 },
-            { name: "Framer Motion", level: 90 }
-        ],
-        services: [
-            { name: "Landing Pages", level: 100 },
-            { name: "E-Commerce", level: 85 },
-            { name: "Dashboards", level: 80 },
-            { name: "SEO Optimization", level: 90 },
-            { name: "Performance Tuning", level: 85 }
-        ],
-        design: [
-            { name: "Figma", level: 85 },
-            { name: "UI/UX", level: 80 },
-            { name: "Responsive Design", level: 100 },
-            { name: "Prompt Engineering", level: 90 },
-            { name: "Generative AI", level: 85 }
-        ]
-    },
-
-    education: [
-        {
-            period: "2023 - 2025",
-            degree: "Fullstack Development",
-            institution: "NxtWave CCBP 4.0 Academy",
-            certificate: "Industry Ready Certified",
-            grade: "4.9/5",
-            description: "Intensive training in modern web technologies. Mastered the MERN stack and Python, building multiple production-ready applications."
-        },
-        {
-            period: "2019 - 2022",
-            degree: "BSc Computer Science",
-            institution: "Sdhr Degree College",
-            certificate: "Bachelor's Degree",
-            grade: "7.8/10",
-            description: "Strong foundation in computer science principles, database management, and programming logic."
-        }
-    ],
-
-    experience: [
-        {
-            period: "2024 - Present",
-            role: "Freelance Frontend Developer",
-            company: "Self-Employed",
-            duration: "2+ Years",
-            description: "Working directly with clients to build high-performance websites. Delivered 10+ projects including e-commerce stores, corporate sites, and landing pages. Specialized in converting Figma designs to React code.",
-            skills: ["Client Communication", "Project Management", "React", "Next.js"]
-        },
-        {
-            period: "Jun 2024 - Jul 2024",
-            role: "Frontend Developer Intern",
-            company: "GrapplTech",
-            duration: "2 Months",
-            description: "Collaborated with the design team to revamp the company's landing page. Implemented complex animations and optimized valid lead conversion flow.",
-            certificateUrl: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1744457413/portfolio/Screenshot_2025-04-12_170000_scpl2i.png"
-        }
-    ],
-
     certifications: [
         {
             title: "Goldman Sachs Software Engineering",
@@ -176,6 +167,41 @@ export const portfolioData = {
             title: "Interactive Web Development",
             issuer: "NxtWave",
             url: "https://certificates.ccbp.in/academy/build-your-own-responsive-website?id=KVGJIMFPQY"
+        }
+    ],
+
+    testimonials: [
+        {
+            id: 1,
+            name: "Bhavani Akurathi",
+            role: "Makeup Artist",
+            company: "The Magic Touch",
+            quote: "An absolute stunning portfolio. Bharath captured the essence of my artistry perfectly. The layout is elegant, and my clients love how easy it is to book appointments.",
+            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
+        },
+        {
+            id: 2,
+            name: "Dileep",
+            role: "Founder",
+            company: "Hetu Pathways",
+            quote: "Professional, responsive, and skilled. The educational consultancy platform he built has streamlined our student counseling process significantly.",
+            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
+        },
+        {
+            id: 3,
+            name: "Rakkesh",
+            role: "Founder",
+            company: "Guggila Global Edu",
+            quote: "We needed a corporate site that builds trust, and Bharath delivered. The user experience is flawless, and we've seen a noticeable increase in inquiries.",
+            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
+        },
+        {
+            id: 4,
+            name: "Krishna",
+            role: "Founder",
+            company: "Vivitaz Healthcare",
+            quote: "A robust and secure platform for our healthcare services. Bharath's technical expertise ensured everything runs smoothly and reliably.",
+            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop"
         }
     ]
 };
