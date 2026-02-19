@@ -109,17 +109,31 @@ export default function ContactSection() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <a href={`mailto:${portfolioData.personal.email}`} className="group flex flex-col p-6 border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/50 hover:border-orange-500/50 transition-all duration-300 rounded-2xl">
+                        <a
+                            href={`mailto:${portfolioData.personal.email}`}
+                            className="group relative flex flex-col p-6 border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/50 hover:border-orange-500/50 transition-all duration-300 rounded-2xl overflow-hidden"
+                        >
+                            <div className="absolute top-4 right-4 text-zinc-800 group-hover:text-orange-500/50 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
+                                <ArrowRight size={16} className="-rotate-45" />
+                            </div>
                             <Mail className="text-zinc-500 group-hover:text-orange-500 mb-4 transition-colors" size={24} />
                             <span className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Email Me</span>
                             <span className="text-white font-mono text-sm">{portfolioData.personal.email}</span>
                         </a>
 
-                        <div className="flex flex-col p-6 border border-zinc-800 bg-zinc-900/20 rounded-2xl">
-                            <MapPin className="text-zinc-500 mb-4" size={24} />
+                        <a
+                            href="https://maps.google.com/?q=India"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative flex flex-col p-6 border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/50 hover:border-orange-500/50 transition-all duration-300 rounded-2xl overflow-hidden"
+                        >
+                            <div className="absolute top-4 right-4 text-zinc-800 group-hover:text-orange-500/50 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
+                                <ArrowRight size={16} className="-rotate-45" />
+                            </div>
+                            <MapPin className="text-zinc-500 group-hover:text-orange-500 mb-4 transition-colors" size={24} />
                             <span className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Location</span>
                             <span className="text-white font-mono text-sm">India (Available Remote)</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
