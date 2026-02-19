@@ -21,15 +21,36 @@ export default function ContactSection() {
         setIsSubmitting(true);
         setSubmitStatus("idle");
 
+        const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+        const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+        const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+        // Defensive check for environment variables
+        if (!serviceId || !templateId || !publicKey) {
+            console.error("Missing EmailJS Environment Variables:", {
+                serviceId: !!serviceId,
+                templateId: !!templateId,
+                publicKey: !!publicKey
+            });
+            setSubmitStatus("error");
+            setIsSubmitting(false);
+            return;
+        }
+
         try {
             // Explicitly initialize with public key
-            emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "");
+            emailjs.init(publicKey);
 
-            await emailjs.sendForm(
-                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
-                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
-                formRef.current!,
-                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ""
+            await emailjs.send(
+                serviceId,
+                templateId,
+                {
+                    from_name: formState.name,
+                    from_email: formState.email,
+                    message: formState.message,
+                    reply_to: formState.email,
+                },
+                publicKey
             );
 
             setSubmitStatus("success");
@@ -37,7 +58,7 @@ export default function ContactSection() {
             // Reset success message after 5 seconds
             setTimeout(() => setSubmitStatus("idle"), 5000);
         } catch (error: any) {
-            console.error("EmailJS Error:", error);
+            console.error("EmailJS Error Detail:", error);
             setSubmitStatus("error");
         } finally {
             setIsSubmitting(false);
