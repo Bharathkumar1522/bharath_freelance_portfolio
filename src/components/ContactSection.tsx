@@ -12,6 +12,7 @@ export default function ContactSection() {
         name: "",
         email: "",
         message: "",
+        consent: false,
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
@@ -54,7 +55,7 @@ export default function ContactSection() {
             );
 
             setSubmitStatus("success");
-            setFormState({ name: "", email: "", message: "" });
+            setFormState({ name: "", email: "", message: "", consent: false });
             // Reset success message after 5 seconds
             setTimeout(() => setSubmitStatus("idle"), 5000);
         } catch (error: any) {
@@ -198,11 +199,29 @@ export default function ContactSection() {
                             </div>
                         </div>
 
+                        {/* Consent Checkbox */}
+                        <div className="flex items-start gap-3 px-1">
+                            <div className="flex items-center h-5">
+                                <input
+                                    id="consent"
+                                    name="consent"
+                                    type="checkbox"
+                                    required
+                                    checked={formState.consent}
+                                    onChange={(e) => setFormState({ ...formState, consent: e.target.checked })}
+                                    className="h-4 w-4 rounded border-zinc-800 bg-zinc-900 text-orange-500 focus:ring-orange-500/20 accent-orange-500"
+                                />
+                            </div>
+                            <label htmlFor="consent" className="text-xs text-zinc-500 leading-normal cursor-pointer select-none">
+                                I consent to Bharath Kumar processing my personal data (name, email) for the purpose of responding to this project query. I understand I can withdraw consent at any time.
+                            </label>
+                        </div>
+
                         {/* Submit Button */}
                         <div className="pt-4">
                             <button
                                 type="submit"
-                                disabled={isSubmitting}
+                                disabled={isSubmitting || !formState.consent}
                                 className="w-full group bg-white hover:bg-orange-500 text-black font-bold font-heading uppercase text-lg py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)]"
                             >
                                 <span>{isSubmitting ? "Sending Message..." : "Send Message"}</span>
@@ -235,6 +254,21 @@ export default function ContactSection() {
                         )}
 
                     </form>
+
+                    {/* Data Security & DPDP Notice */}
+                    <div className="mt-8 flex items-start gap-4 p-5 rounded-2xl border border-orange-500/10 bg-orange-500/[0.03] backdrop-blur-sm">
+                        <div className="mt-1 text-orange-500">
+                            <CheckCircle2 size={18} />
+                        </div>
+                        <div className="space-y-2">
+                            <p className="text-orange-500/80 font-mono text-[11px] uppercase tracking-[0.2em] font-bold leading-none">DPDP 2023 Compliant Handling</p>
+                            <p className="text-zinc-300 text-xs leading-relaxed">
+                                <strong>Data Fiduciary:</strong> Bharath Kumar. <br />
+                                <strong>Purpose:</strong> To respond to project inquiries. Your data is encrypted in transit and never shared with third parties. <br />
+                                <strong>Your Rights:</strong> You have the right to access, correct, or erase your data and withdraw consent at any time via {portfolioData.personal.email}.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
