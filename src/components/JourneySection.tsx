@@ -72,7 +72,7 @@ export default function JourneySection() {
             {/* ─── Rich Space Background ─── */}
 
             {/* 1. Base Starfield (CSS radial gradients for performance) */}
-            <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen"
+            <div className="absolute inset-0 z-0 opacity-80"
                 style={{
                     backgroundImage: `
                         radial-gradient(1px 1px at 10% 10%, white, transparent),
@@ -132,7 +132,7 @@ export default function JourneySection() {
             {PARTICLES.map((p, i) => (
                 <span
                     key={i}
-                    className="animate-float-particle absolute bottom-0 rounded-full bg-orange-400/50 pointer-events-none z-0"
+                    className="animate-float-particle absolute bottom-0 rounded-full bg-orange-400/80 pointer-events-none z-0"
                     style={{
                         left: p.left,
                         width: p.size,

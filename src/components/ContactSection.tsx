@@ -16,7 +16,6 @@ export default function ContactSection() {
         name: "",
         email: "",
         message: "",
-        consent: false,
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
@@ -45,7 +44,7 @@ export default function ContactSection() {
                 reply_to: formState.email,
             }, publicKey);
             setSubmitStatus("success");
-            setFormState({ name: "", email: "", message: "", consent: false });
+            setFormState({ name: "", email: "", message: "" });
             setTimeout(() => setSubmitStatus("idle"), 5000);
         } catch (error: any) {
             console.error("EmailJS Error:", error);
@@ -216,20 +215,10 @@ export default function ContactSection() {
                             </div>
                         </div>
 
-                        <div className="flex items-start gap-3 px-1">
-                            <div className="flex items-center h-5">
-                                <input id="consent" name="consent" type="checkbox" required
-                                    checked={formState.consent}
-                                    onChange={(e) => setFormState({ ...formState, consent: e.target.checked })}
-                                    className="h-4 w-4 rounded border-zinc-800 bg-zinc-900 text-orange-500 focus:ring-orange-500/20 accent-orange-500" />
-                            </div>
-                            <label htmlFor="consent" className="text-xs text-zinc-500 leading-normal cursor-pointer select-none">
-                                I consent to Bharath Kumar processing my personal data for the purpose of responding to this project query.
-                            </label>
-                        </div>
+
 
                         <div className="pt-4">
-                            <button type="submit" disabled={isSubmitting || !formState.consent}
+                            <button type="submit" disabled={isSubmitting}
                                 className="w-full group bg-white text-black hover:text-white font-bold font-heading uppercase text-lg py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:bg-gradient-to-r hover:from-orange-500 hover:to-amber-400 hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]">
                                 <span>{isSubmitting ? "Sending Message..." : "Send Message"}</span>
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -257,18 +246,7 @@ export default function ContactSection() {
                         )}
                     </form>
 
-                    {/* DPDP Notice */}
-                    <div className="mt-8 flex items-start gap-4 p-5 rounded-2xl border border-orange-500/10 bg-orange-500/[0.03] backdrop-blur-sm">
-                        <div className="mt-1 text-orange-500"><CheckCircle2 size={18} /></div>
-                        <div className="space-y-2">
-                            <p className="text-orange-500/80 font-mono text-[11px] uppercase tracking-[0.2em] font-bold leading-none">DPDP 2023 Compliant Handling</p>
-                            <p className="text-zinc-300 text-xs leading-relaxed">
-                                <strong>Data Fiduciary:</strong> Bharath Kumar. <br />
-                                <strong>Purpose:</strong> To respond to project inquiries. Data is encrypted in transit and never shared. <br />
-                                <strong>Your Rights:</strong> Access, correct, or erase your data via {portfolioData.personal.email}.
-                            </p>
-                        </div>
-                    </div>
+                    {/* DPDP Notice REMOVED */}
                 </motion.div>
             </div>
         </section>
