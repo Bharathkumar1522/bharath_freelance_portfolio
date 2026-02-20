@@ -8,8 +8,10 @@ import { useLenis } from "@/components/SmoothScrolling";
 const navLinks = [
     { name: "About", href: "#hero" },
     { name: "Services", href: "#services" },
+    { name: "Skills", href: "#skills" },
     { name: "Work", href: "#work" },
-    { name: "Experience", href: "#experience" },
+    { name: "Timeline", href: "#experience" },
+    { name: "Reviews", href: "#testimonials" },
     { name: "Contact", href: "#contact" },
 ];
 
@@ -25,15 +27,15 @@ export default function Navbar() {
     });
 
     useEffect(() => {
-        const allSectionIds = ["hero", "skills", "services", "work", "experience", "certifications", "testimonials", "contact"];
+        const allSectionIds = ["hero", "services", "skills", "work", "experience", "certifications", "testimonials", "contact"];
         const sectionToTab: Record<string, string> = {
             hero: "#hero",
-            skills: "#hero",
             services: "#services",
+            skills: "#skills",
             work: "#work",
             experience: "#experience",
             certifications: "#experience",
-            testimonials: "#experience",
+            testimonials: "#testimonials",
             contact: "#contact",
         };
 
@@ -84,8 +86,8 @@ export default function Navbar() {
                 {/* Outer glow effect when scrolled */}
                 <div
                     className={`flex items-center gap-1 rounded-full border px-2 py-1.5 transition-all duration-500 ${scrolled
-                            ? "bg-black/75 border-white/15 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.05)]"
-                            : "bg-black/40 border-white/8 backdrop-blur-xl"
+                        ? "bg-black/75 border-white/15 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.05)]"
+                        : "bg-black/40 border-white/8 backdrop-blur-xl"
                         }`}
                 >
                     {/* Logo */}
