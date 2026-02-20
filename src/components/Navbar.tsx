@@ -6,7 +6,6 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-
 import { useLenis } from "@/components/SmoothScrolling";
 
 const navLinks = [
-    { name: "About", href: "#hero" },
     { name: "Services", href: "#services" },
     { name: "Skills", href: "#skills" },
     { name: "Work", href: "#work" },
