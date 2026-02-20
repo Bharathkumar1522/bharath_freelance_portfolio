@@ -124,14 +124,7 @@ function ServiceCard({
                         ))}
                     </div>
 
-                    {/* Animated arrow on hover */}
-                    <motion.div
-                        whileHover={{ x: 3, y: -3 }}
-                        className="flex-shrink-0 w-9 h-9 rounded-full border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-                        style={{ borderColor: `${cfg.accent}40`, color: cfg.accent }}
-                    >
-                        <ArrowUpRight size={16} />
-                    </motion.div>
+
                 </div>
             </div>
         </motion.div>
