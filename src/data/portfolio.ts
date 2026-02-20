@@ -105,7 +105,7 @@ export const portfolioData = {
             id: 1,
             title: "Vivitaz Healthcare",
             category: "Healthcare Platform",
-            year: "2024",
+            year: "2025",
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1770973181/Screenshot_2026-02-13_142555_zho4vv.png",
             link: "https://vivitaz.com/",
             description: "A comprehensive healthcare platform providing advanced medical solutions. Built with scalability and user trust in mind."
@@ -114,7 +114,7 @@ export const portfolioData = {
             id: 2,
             title: "Hetu Pathways",
             category: "Educational Consultancy",
-            year: "2024",
+            year: "2025",
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1770964302/portfolio/Screenshot_2025-12-16_120724_de5xnw.png",
             link: "https://www.hetupathways.com/",
             description: "A dynamic consultancy website helping students navigate their educational journey. Features interactive course finders and counseling booking."
@@ -123,7 +123,7 @@ export const portfolioData = {
             id: 3,
             title: "The Magic Touch",
             category: "Portfolio / Beauty",
-            year: "2024",
+            year: "2025",
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1770964303/portfolio/Screenshot_2025-12-16_115954_syld3j.png",
             link: "https://themagictouchbybhavani.netlify.app/",
             description: "An elegant, visually rich portfolio for a Bridal Makeup Artist. Focused on high-quality gallery presentation and aesthetic appeal."
@@ -132,7 +132,7 @@ export const portfolioData = {
             id: 4,
             title: "Guggila Global Edu",
             category: "Study Abroad",
-            year: "2024",
+            year: "2025",
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1770964303/portfolio/Screenshot_2025-12-16_120347_ocrafa.png",
             link: "https://guggillaglobaledu.org/",
             description: "A professional corporate website for an education consultancy, featuring automated lead capture and service detailing."
@@ -141,7 +141,7 @@ export const portfolioData = {
             id: 5,
             title: "The Tasty Den",
             category: "Restaurant",
-            year: "2025",
+            year: "2024",
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1744453742/portfolio/Screenshot_2025-04-12_155848_hxsefg.png",
             link: "https://tasty-den-site.vercel.app/",
             description: "A commercially active restaurant website with a vibrant menu display and table reservation capabilities."
@@ -149,8 +149,8 @@ export const portfolioData = {
         {
             id: 6,
             title: "Zentry-Inspired",
-            category: "Design Concept",
-            year: "2025",
+            category: "Design Prototype",
+            year: "2023",
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1744453636/portfolio/Screenshot_537_h3p9ec.png",
             link: "https://awwwards-website-kappa.vercel.app/",
             description: "An award-winning design implementation inspired by Zentry, featuring heavy scroll interactions and WebGL effects."
@@ -189,7 +189,7 @@ export const portfolioData = {
         },
         {
             id: 3,
-            name: "Rakkesh",
+            name: "Rakesh",
             role: "Founder",
             company: "Guggila Global Edu",
             quote: "We needed a corporate site that builds trust, and Bharath delivered. The user experience is flawless, and we've seen a noticeable increase in inquiries.",
