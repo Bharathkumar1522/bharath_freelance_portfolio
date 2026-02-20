@@ -3,7 +3,6 @@ import { Rajdhani, Exo_2, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScrolling from "@/components/SmoothScrolling";
 import Preloader from "@/components/Preloader";
-import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import LaserFlow from "@/components/LaserFlow";
 import { PreloaderProvider } from "@/context/PreloaderContext";
@@ -27,13 +26,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://bharath-portfolio.vercel.app/", // Placeholder URL
+    url: "https://bharath-portfolio.vercel.app/",
     title: "Bharath | High-Converting Websites for Creators & Businesses",
     description: "I build websites that tell your story and drive results. Dedicated to help creators and businesses stand out.",
     siteName: "Bharath Portfolio",
     images: [
       {
-        url: "/og-image.png", // Assuming existence or placeholder
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Bharath Portfolio OpenGraph Image",
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
     title: "Bharath | High-Converting Websites for Creators & Businesses",
     description: "I build websites that tell your story and drive results. Dedicated to help creators and businesses stand out.",
     images: ["/og-image.png"],
-    creator: "@bharath_codes", // Placeholder handle
+    creator: "@bharath_codes",
   },
   robots: {
     index: true,
@@ -69,26 +68,24 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${rajdhani.variable} ${exo2.variable} ${jetbrainsMono.variable} font-sans bg-transparent text-foreground antialiased selection:bg-accent selection:text-accent-foreground`}>
 
-        {/* Global Fixed Background Video */}
-        {/* Global Fixed Background - LaserFlow */}
+        {/* LaserFlow renders IMMEDIATELY at z-index -1, behind everything including preloader.
+            This lets the WebGL shader warm up during loading so it's ready when preloader exits. */}
         <div className="fixed inset-0 z-[-1] min-h-screen w-full overflow-hidden bg-black pointer-events-none">
           <LaserFlow
             wispDensity={1.2}
             flowSpeed={0.4}
-            color="#FF6B35" // Cosmic Orange
+            color="#FF6B35"
             fogIntensity={0.6}
             horizontalBeamOffset={0}
             verticalBeamOffset={-0.4}
           />
-          {/* Overlay for text readability */}
           <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
         </div>
 
         <SmoothScrolling>
           <PreloaderProvider>
-            <Navbar />
             <Preloader />
-            <CustomCursor />
+            <Navbar />
             {children}
           </PreloaderProvider>
         </SmoothScrolling>

@@ -7,8 +7,13 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useLenis } from "@/components/SmoothScrolling";
 import { usePreloader } from "@/context/PreloaderContext";
 import { ScrambleText } from "@/components/ui/TextScramble";
+import dynamic from "next/dynamic";
 
 import { portfolioData } from "@/data/portfolio";
+
+const SpaceBackground = dynamic(() => import("@/components/SpaceBackground"), {
+    ssr: false,
+});
 
 const ROLES = ["Frontend Specialist", "Creative Developer", "UI/UX Engineer", "React Ecosystem Expert"];
 
@@ -60,119 +65,108 @@ export default function Hero() {
     };
 
     return (
-        <section id="hero" ref={container} className="relative h-[100dvh] w-full overflow-hidden bg-transparent text-white perspective-1000">
+        <section id="hero" ref={container} className="relative h-[100dvh] w-full overflow-hidden bg-[#020208] text-white perspective-1000">
+
+            {/* ─── Immersive Space Background ─── */}
+            <SpaceBackground />
 
             {/* --- Tech Accents Layer --- */}
-            <div className="absolute inset-x-4 top-24 bottom-10 border-x border-white/10 pointer-events-none select-none z-10 md:inset-x-12">
+            {/* --- Tech Accents Layer --- */}
+            <div className="absolute inset-x-4 top-24 bottom-10 border-x border-white/[0.07] pointer-events-none select-none z-10 md:inset-x-12">
                 {/* Corners - High Visibility */}
-                <div className="absolute top-0 left-0 w-6 h-6 border-t-[3px] border-l-[3px] border-orange-500 rounded-tl-sm" />
-                <div className="absolute top-0 right-0 w-6 h-6 border-t-[3px] border-r-[3px] border-orange-500 rounded-tr-sm" />
-                <div className="absolute bottom-0 left-0 w-6 h-6 border-b-[3px] border-l-[3px] border-orange-500 rounded-bl-sm" />
-                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-[3px] border-r-[3px] border-orange-500 rounded-br-sm" />
+                <div className="absolute top-0 left-0 w-6 h-6 border-t-[3px] border-l-[3px] border-orange-500/70 rounded-tl-sm shadow-[0_0_8px_rgba(255,107,53,0.3)]" />
+                <div className="absolute top-0 right-0 w-6 h-6 border-t-[3px] border-r-[3px] border-orange-500/70 rounded-tr-sm shadow-[0_0_8px_rgba(255,107,53,0.3)]" />
+                <div className="absolute bottom-0 left-0 w-6 h-6 border-b-[3px] border-l-[3px] border-orange-500/70 rounded-bl-sm shadow-[0_0_8px_rgba(255,107,53,0.3)]" />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-[3px] border-r-[3px] border-orange-500/70 rounded-br-sm shadow-[0_0_8px_rgba(255,107,53,0.3)]" />
 
                 {/* Side Markers */}
-                <div className="absolute top-1/4 -left-[2px] w-1 h-12 bg-orange-500/50 shadow-[0_0_10px_rgba(255,107,53,0.5)]" />
-                <div className="absolute top-3/4 -right-[2px] w-1 h-12 bg-orange-500/50 shadow-[0_0_10px_rgba(255,107,53,0.5)]" />
+                <div className="absolute top-1/4 -left-[2px] w-1 h-12 bg-orange-500/40 shadow-[0_0_12px_rgba(255,107,53,0.4)]" />
+                <div className="absolute top-3/4 -right-[2px] w-1 h-12 bg-orange-500/40 shadow-[0_0_12px_rgba(255,107,53,0.4)]" />
             </div>
 
 
             {/* --- Content Layer --- */}
-            <div className="relative z-20 flex h-full w-full flex-col items-center justify-center pointer-events-none pt-6 md:pt-12 pb-24 md:pb-32">
-                <div className="container mx-auto px-4 flex flex-col items-center justify-center h-full max-w-5xl">
+            <div className="relative z-20 flex h-full w-full flex-col items-center justify-center pointer-events-none px-4">
+                <div className="flex flex-col items-center justify-center max-w-5xl w-full">
 
                     {/* Status Pill */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                        className="mb-4 pointer-events-auto"
-                    >
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_0_15px_-3px_rgba(255,255,255,0.1)] hover:bg-white/10 transition-colors cursor-default group">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                            </span>
-                            <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 group-hover:text-white transition-colors">Available for Work</span>
-                        </div>
-                    </motion.div>
+                    {/* Status Pill REMOVED */}
 
 
-                    {/* Main Typography */}
-                    <motion.div style={{ y: yText, opacity }} className="flex flex-col items-center w-full z-20">
+                    {/* Main Typography — all in one scroll-linked block */}
+                    <motion.div style={{ y: yText, opacity }} className="flex flex-col items-center w-full">
 
-                        {/* 1. Name - Massive & Tight */}
-                        <div className="relative mb-1 md:mb-2">
-                            <h1 className="text-6xl sm:text-7xl md:text-[10vw] leading-[0.85] font-black font-heading tracking-tighter text-white select-none pointer-events-auto mix-blend-difference">
-                                <ScrambleText
-                                    text="BHARATH"
-                                    className="block relative z-10"
-                                    trigger={!isLoading}
-                                />
-                                <motion.span
-                                    initial={{ opacity: 0 }}
-                                    animate={!isLoading ? { opacity: 1 } : {}}
-                                    transition={{ delay: 1.5, duration: 1 }}
-                                    className="block absolute top-0 left-0 z-0 text-transparent blur-sm opacity-50"
-                                    style={{ WebkitTextStroke: "1px rgba(255,107,53,0.5)" }}
-                                >
-                                    BHARATH
-                                </motion.span>
-                            </h1>
-                        </div>
+                        {/* Name */}
+                        <h1
+                            className="text-6xl sm:text-7xl md:text-[9vw] leading-[0.85] font-black font-heading tracking-tighter text-white select-none pointer-events-auto text-center mb-6 md:mb-8"
+                            style={{ textShadow: "0 0 60px rgba(255,107,53,0.15), 0 4px 20px rgba(0,0,0,0.5)" }}
+                        >
+                            <ScrambleText
+                                text="BHARATH"
+                                className="block relative z-10"
+                                trigger={!isLoading}
+                            />
+                            <motion.span
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                                className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-300 to-amber-400"
+                                style={{ textShadow: "none" }}
+                            >
+                                KUMAR
+                            </motion.span>
+                        </h1>
 
-
-
-                        {/* 2. Value Proposition - Dynamic from Data */}
+                        {/* Tagline + Description */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={!isLoading ? { opacity: 1, y: 0 } : {}}
                             transition={{ delay: 1.2, duration: 0.8 }}
-                            className="text-center max-w-4xl px-4 mb-10 flex flex-col items-center gap-6"
+                            className="text-center max-w-3xl px-4 mb-8 flex flex-col items-center gap-3"
                         >
-                            <h2 className="text-lg md:text-2xl font-light text-zinc-300 tracking-wide font-heading uppercase drop-shadow-md">
+                            <h2
+                                className="text-base md:text-xl font-light text-white/80 tracking-wide font-heading uppercase"
+                                style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
+                            >
                                 {portfolioData.personal.tagline}
                             </h2>
 
-                            <p className="text-sm md:text-lg text-zinc-400 font-sans leading-relaxed tracking-wide max-w-2xl drop-shadow-sm">
-                                {portfolioData.personal.description}
-                            </p>
+                            {/* Description REMOVED */}
                         </motion.div>
 
-                        {/* 3. System Status - Cyber Typewriter */}
-                        <div className="h-7 md:h-8 flex items-center justify-center overflow-hidden bg-black/60 backdrop-blur-md px-3 md:px-4 rounded-full border border-white/5 shadow-[0_0_15px_rgba(0,0,0,0.5)] w-auto max-w-[90vw]">
-                            <p className="font-mono text-[10px] md:text-sm text-zinc-600 tracking-wider md:tracking-[0.2em] uppercase whitespace-nowrap overflow-hidden text-ellipsis">
-                                SYSTEM_STATUS :: <span className="text-zinc-300 font-bold">{displayedRole}</span>
-                                <span className="animate-pulse ml-1 text-orange-500/80">_</span>
-                            </p>
-                        </div>
+                        {/* CTA Button — in flow, not absolute */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 1.5, duration: 0.7 }}
+                            className="mb-5 pointer-events-auto"
+                        >
+                            <MagneticButton onClick={handleScrollToWork}>
+                                <div className="group relative flex items-center gap-3 px-7 py-3.5 bg-gradient-to-r from-orange-500 to-amber-400 rounded-full hover:from-orange-400 hover:to-amber-300 transition-all duration-300 shadow-[0_0_20px_rgba(255,107,53,0.3)] hover:shadow-[0_0_30px_rgba(255,107,53,0.5)]">
+                                    <span className="text-sm font-bold font-heading uppercase tracking-widest text-black">
+                                        Explore Works
+                                    </span>
+                                    <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+                                </div>
+                            </MagneticButton>
+                        </motion.div>
+
+                        {/* System Status Typewriter */}
+                        {/* System Status REMOVED */}
 
                     </motion.div>
 
                 </div>
 
-                {/* --- Scroll Indicator --- */}
-                <motion.div
+                {/* Scroll hint — at the very bottom */}
+                <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 2, duration: 1 }}
-                    className="absolute bottom-16 md:bottom-24 flex flex-col items-center gap-4 pointer-events-auto z-30"
+                    transition={{ delay: 2.5, duration: 1 }}
+                    className="absolute bottom-6 md:bottom-10 text-[10px] font-mono text-orange-500/30 uppercase tracking-[0.3em] animate-pulse pointer-events-none"
                 >
-                    <MagneticButton onClick={handleScrollToWork}>
-                        <div className="group relative flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300">
-                            <span className="text-sm font-bold font-heading uppercase tracking-widest text-white group-hover:text-orange-400 transition-colors">
-                                Explore Works
-                            </span>
-                            <ArrowRight className="w-4 h-4 text-white group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
-
-                            {/* Glow */}
-                            <div className="absolute inset-0 rounded-full bg-orange-500/10 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                    </MagneticButton>
-
-                    <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] animate-pulse">
-                        Scroll
-                    </span>
-                </motion.div>
+                    Scroll
+                </motion.span>
             </div>
 
         </section>

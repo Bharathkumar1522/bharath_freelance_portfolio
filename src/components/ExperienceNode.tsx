@@ -1,12 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
+import { motion } from "framer-motion";
 
 interface ExperienceNodeProps {
     title: string;
@@ -14,56 +8,75 @@ interface ExperienceNodeProps {
     description: string;
     date: string;
     align: "left" | "right";
+    index?: number;
 }
 
-export default function ExperienceNode({ title, company, description, date, align }: ExperienceNodeProps) {
-    const nodeRef = useRef<HTMLDivElement>(null);
+export default function ExperienceNode({ title, company, description, date, align, index = 0 }: ExperienceNodeProps) {
+    const isLeft = align === "left";
 
-    useEffect(() => {
-        const el = nodeRef.current;
-        if (!el) return;
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.18,
+                delayChildren: 0.05,
+            },
+        },
+    };
 
-        gsap.fromTo(
-            el,
-            { opacity: 0, scale: 0.8, y: 50 },
-            {
-                opacity: 1,
-                scale: 1,
-                y: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse",
-                },
-            }
-        );
-    }, []);
+    const dotVariants = {
+        hidden: { scale: 0, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: { type: "spring" as const, stiffness: 260, damping: 18 },
+        },
+    };
+
+    const contentVariants = {
+        hidden: { opacity: 0, y: 30 }, // vertical-only — avoids horizontal clipping on mobile
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+        },
+    };
 
     return (
-        <div
-            ref={nodeRef}
-            className={`relative mb-16 md:mb-24 flex w-full flex-col md:flex-row items-start md:items-center justify-between ${align === "left" ? "md:flex-row" : "md:flex-row-reverse"}`}
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+                once: false,   // ← replays every time section enters view
+                amount: 0.25,  // ← triggers when 25% of element is visible (reliable on mobile)
+            }}
+            variants={containerVariants}
+            className={`relative mb-16 md:mb-24 flex w-full flex-col md:flex-row items-start md:items-center justify-between ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
         >
-            {/* Center Node (Visual anchor) */}
-            {/* Mobile: Left aligned at 19px (half of 40px grid or similar). Desktop: Center */}
-            <div className="absolute left-[1.1rem] md:left-1/2 md:-translate-x-1/2 top-0 md:top-auto flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 shadow-[0_0_20px_rgba(249,115,22,0.8)] z-20">
+            {/* Orange pulse node on the spine */}
+            <motion.div
+                variants={dotVariants}
+                className="absolute left-[1.1rem] md:left-1/2 md:-translate-x-1/2 top-0 md:top-auto flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 shadow-[0_0_20px_rgba(249,115,22,0.8)] z-20"
+            >
                 <div className="h-full w-full rounded-full bg-white animate-ping opacity-20" />
-            </div>
+            </motion.div>
 
-            {/* Content Side */}
-            <div className={`w-full md:w-[40%] pl-12 md:pl-0 ${align === "left" ? "md:text-right md:items-end" : "md:text-left md:items-start"}`}>
-                <div className={`flex flex-col items-start ${align === "left" ? "md:items-end" : "md:items-start"}`}>
+            {/* Content */}
+            <motion.div
+                variants={contentVariants}
+                className={`w-full md:w-[40%] pl-12 md:pl-0 ${isLeft ? "md:text-right md:items-end" : "md:text-left md:items-start"}`}
+            >
+                <div className={`flex flex-col items-start ${isLeft ? "md:items-end" : "md:items-start"}`}>
                     <h3 className="text-2xl md:text-3xl font-bold text-white font-heading">{title}</h3>
                     <p className="text-lg md:text-xl text-orange-400 font-sans font-medium">{company}</p>
                     <span className="text-xs md:text-sm text-zinc-400 mb-2 font-mono">{date}</span>
                     <p className="text-zinc-300 font-sans text-sm md:text-base font-medium leading-relaxed">{description}</p>
                 </div>
-            </div>
+            </motion.div>
 
-            {/* Empty Side for balance on Desktop */}
+            {/* Empty side for balance on desktop */}
             <div className="hidden md:block w-[40%]" />
-        </div>
+        </motion.div>
     );
 }

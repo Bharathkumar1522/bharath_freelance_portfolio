@@ -70,7 +70,7 @@ export default function Footer() {
                     <div className="md:col-span-3 flex flex-col gap-4">
                         <h4 className="text-white font-heading font-bold uppercase tracking-wider mb-2">Explore</h4>
                         <nav className="flex flex-col gap-3">
-                            {['About', 'Work', 'Experience', 'Contact'].map((item) => (
+                            {['Skills', 'Work', 'Experience', 'Contact'].map((item) => (
                                 <a
                                     key={item}
                                     href={`#${item.toLowerCase()}`}

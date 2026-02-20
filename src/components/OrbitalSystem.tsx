@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, Globe, Palette, Code, Terminal, Zap } from "lucide-react";
 
@@ -26,6 +26,30 @@ interface OrbitalSystemProps {
 export default function OrbitalSystem({ categories }: OrbitalSystemProps) {
     const [activeCategory, setActiveCategory] = useState<string | null>(categories[0]?.id || null);
     const [isLocked, setIsLocked] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const isInViewport = useRef(true);
+    const isDocVisible = useRef(true);
+
+    useEffect(() => {
+        const el = containerRef.current;
+        if (!el) return;
+
+        const update = () => setIsVisible(isInViewport.current && isDocVisible.current);
+
+        // Track scroll-based visibility
+        const observer = new IntersectionObserver(
+            ([entry]) => { isInViewport.current = entry.isIntersecting; update(); },
+            { threshold: 0.05 }
+        );
+        observer.observe(el);
+
+        // Track tab/window visibility
+        const onVisChange = () => { isDocVisible.current = !document.hidden; update(); };
+        document.addEventListener('visibilitychange', onVisChange);
+
+        return () => { observer.disconnect(); document.removeEventListener('visibilitychange', onVisChange); };
+    }, []);
 
     const handleCategoryClick = (id: string) => {
         if (activeCategory === id && isLocked) {
@@ -45,6 +69,7 @@ export default function OrbitalSystem({ categories }: OrbitalSystemProps) {
 
     return (
         <div
+            ref={containerRef}
             className="relative w-full h-[800px] flex items-center justify-center overflow-visible group"
             onMouseLeave={handleContainerLeave}
             style={{ perspective: '1000px' }}
@@ -53,11 +78,24 @@ export default function OrbitalSystem({ categories }: OrbitalSystemProps) {
             {/* Central Star (You) - 3D Core */}
             <div className="absolute z-10" style={{ transformStyle: 'preserve-3d' }}>
                 <div className="relative w-24 h-24">
-                    <div className="absolute inset-0 rounded-full bg-orange-500 blur-[60px] opacity-60 animate-pulse" />
-                    {/* The Sun Sphere */}
-                    <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,#fff,#ff8a4c,#ff4500)] shadow-[inset_-10px_-10px_20px_rgba(0,0,0,0.5),0_0_30px_#ff4500] border border-white/20" />
+                    {/* Subtle outer glow */}
+                    <div className="absolute -inset-2 rounded-full opacity-40" style={{ boxShadow: '0 0 20px rgba(255,107,53,0.3), 0 0 40px rgba(255,107,53,0.1)' }} />
+                    {/* Dark metallic body */}
+                    <div
+                        className="absolute inset-0 rounded-full border-2 border-orange-500/40"
+                        style={{
+                            background: 'radial-gradient(circle at 40% 35%, #2a2a35 0%, #18181f 35%, #0d0d12 100%)',
+                            boxShadow: 'inset 0 0 20px rgba(255,107,53,0.1), 0 4px 20px rgba(0,0,0,0.6)'
+                        }}
+                    />
+                    {/* Specular highlight */}
+                    <div
+                        className="absolute top-[12%] left-[22%] w-[35%] h-[22%] rounded-full pointer-events-none"
+                        style={{ background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.12) 0%, transparent 100%)' }}
+                    />
+                    {/* ME text */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-white font-heading font-bold text-xl tracking-widest drop-shadow-md">ME</span>
+                        <span className="text-orange-400 font-heading font-bold text-xl tracking-widest drop-shadow-[0_0_8px_rgba(255,107,53,0.4)]">ME</span>
                     </div>
                 </div>
             </div>
@@ -76,6 +114,7 @@ export default function OrbitalSystem({ categories }: OrbitalSystemProps) {
                         category={cat}
                         activeId={activeCategory}
                         isLocked={isLocked && activeCategory === cat.id}
+                        isVisible={isVisible}
                         onHover={(id) => !isLocked && setActiveCategory(id)}
                         onClick={() => handleCategoryClick(cat.id)}
                     />
@@ -97,10 +136,11 @@ export default function OrbitalSystem({ categories }: OrbitalSystemProps) {
     );
 }
 
-function OrbitRing({ category, activeId, isLocked, onHover, onClick }: {
+function OrbitRing({ category, activeId, isLocked, isVisible, onHover, onClick }: {
     category: OrbitCategory,
     activeId: string | null,
     isLocked: boolean,
+    isVisible: boolean,
     onHover: (id: string | null) => void,
     onClick: () => void
 }) {
@@ -121,10 +161,13 @@ function OrbitRing({ category, activeId, isLocked, onHover, onClick }: {
         >
             {/* Rotating Container */}
             <div
-                className="absolute w-full h-full animate-spin-slow group-hover:[animation-play-state:paused] pointer-events-none"
+                className="absolute w-full h-full pointer-events-none"
                 style={{
+                    animationName: 'spin',
                     animationDuration: `${category.speed}s`,
-                    animationPlayState: isLocked ? 'paused' : undefined,
+                    animationTimingFunction: 'linear',
+                    animationIterationCount: 'infinite',
+                    animationPlayState: (isLocked || !isVisible) ? 'paused' : 'running',
                     transformStyle: 'preserve-3d'
                 }}
             >
@@ -161,10 +204,13 @@ function OrbitRing({ category, activeId, isLocked, onHover, onClick }: {
                 >
                     {/* Planet Body - Counter Rotated to face camera */}
                     <div
-                        className="relative w-12 h-12 animate-spin-slow-reverse transition-transform duration-300 hover:scale-125"
+                        className="relative w-12 h-12 transition-transform duration-300 hover:scale-125"
                         style={{
+                            animationName: 'spin-reverse',
                             animationDuration: `${category.speed}s`,
-                            animationPlayState: isLocked ? 'paused' : undefined,
+                            animationTimingFunction: 'linear',
+                            animationIterationCount: 'infinite',
+                            animationPlayState: (isLocked || !isVisible) ? 'paused' : 'running',
                             transformStyle: 'preserve-3d'
                         }}
                     >
@@ -174,26 +220,41 @@ function OrbitRing({ category, activeId, isLocked, onHover, onClick }: {
                             style={{ transform: 'rotateX(-60deg)', transformStyle: 'preserve-3d' }}
                         >
 
-                            {/* Glow */}
+                            {/* Outer glow ring — visible on hover/active */}
                             <div
-                                className="absolute inset-0 rounded-full blur-md transition-opacity duration-300 pointer-events-none"
+                                className="absolute -inset-1 rounded-full transition-opacity duration-500 pointer-events-none"
                                 style={{
-                                    backgroundColor: category.color,
-                                    opacity: isActive ? 0.8 : 0.4
+                                    opacity: isActive ? 0.6 : 0,
+                                    boxShadow: `0 0 12px ${category.color}50, 0 0 25px ${category.color}20`
                                 }}
                             />
 
-                            {/* Realistic Sphere Gradient */}
+                            {/* Dark metallic orb body */}
                             <div
-                                className="absolute inset-0 rounded-full shadow-[inset_-4px_-4px_10px_rgba(0,0,0,0.8),0_0_10px_rgba(255,255,255,0.2)]"
+                                className="absolute inset-0 rounded-full transition-all duration-300"
                                 style={{
-                                    background: `radial-gradient(circle at 30% 30%, #fff, ${category.color}, #000)`
+                                    background: `radial-gradient(circle at 40% 35%, #2a2a35 0%, #18181f 40%, #0d0d12 100%)`,
+                                    border: `1.5px solid ${isActive ? category.color : 'rgba(255,255,255,0.1)'}`,
+                                    boxShadow: isActive
+                                        ? `inset 0 0 12px ${category.color}25, 0 4px 15px rgba(0,0,0,0.6)`
+                                        : `inset 0 1px 2px rgba(255,255,255,0.05), 0 4px 15px rgba(0,0,0,0.6)`
                                 }}
                             />
 
-                            {/* Icon Overlay */}
-                            <div className="absolute inset-0 flex items-center justify-center opacity-90">
-                                <category.icon className="w-5 h-5 text-white drop-shadow-md mix-blend-overlay" />
+                            {/* Specular highlight — tiny subtle shine */}
+                            <div
+                                className="absolute top-[15%] left-[25%] w-[30%] h-[20%] rounded-full pointer-events-none"
+                                style={{
+                                    background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, transparent 100%)',
+                                }}
+                            />
+
+                            {/* Icon */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <category.icon
+                                    className="w-5 h-5 transition-colors duration-300"
+                                    style={{ color: isActive ? category.color : 'rgba(255,255,255,0.6)' }}
+                                />
                             </div>
 
                             {/* Label - Floating Above */}

@@ -23,10 +23,10 @@ export default function SmoothScrolling({
   useEffect(() => {
     // Initialize Lenis with lighter, responsive feel
     const lenisInstance = new Lenis({
-      duration: 1.7, // Slightly increased from 1.5 for better control
+      duration: 1.3, // Reduced from 1.7 for less "float", more "butter"
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2, // Increased for mobile responsiveness
-      wheelMultiplier: 0.8, // Increased from 0.3 for faster scroll speed
+      touchMultiplier: 2.5, // Further increased for responsiveness
+      wheelMultiplier: 0.9, // Slightly faster precise scrolling
     });
 
     setLenis(lenisInstance);
@@ -42,12 +42,24 @@ export default function SmoothScrolling({
 
     gsap.ticker.add(update);
 
+    // Store current GSAP lagSmoothing to restore later (best effort, as getter support varies)
+    // 500ms/33ms are GSAP defaults if we can't retrieve current
+    const previousLag = (gsap.ticker.lagSmoothing as any)() || false;
+
     // Disable GSAP lag smoothing to prevent visual stuttering during heavy frames
-    // This is critical for keeping scroll and animation in sync
+    // This is critical for keeping scroll and animation in sync with Lenis
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       gsap.ticker.remove(update);
+
+      // Restore previous lag smoothing state or default
+      if (previousLag) {
+        (gsap.ticker.lagSmoothing as any)(previousLag);
+      } else {
+        gsap.ticker.lagSmoothing(500, 33);
+      }
+
       lenisInstance.destroy();
     };
   }, []);

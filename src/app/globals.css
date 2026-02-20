@@ -80,6 +80,13 @@
     font-family: var(--font-exo2), ui-monospace, sans-serif;
     background-color: #000000;
     /* Ensure body is also black */
+    -webkit-overflow-scrolling: touch;
+    /* iOS momentum scroll */
+    -webkit-tap-highlight-color: transparent;
+    /* Remove tap flash on mobile */
+    text-rendering: optimizeSpeed;
+    /* Skip ligature analysis for perf */
+    -webkit-font-smoothing: antialiased;
   }
 
   h1,
@@ -208,4 +215,127 @@ html {
 
 .animate-spin-slow-reverse {
   animation: spin-reverse 10s linear infinite;
+}
+
+/* ─── Preloader Progress Bar ─── */
+@keyframes progress-bar {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress-bar {
+  animation: progress-bar 2.5s ease-in-out forwards;
+}
+
+/* ─── Content Visibility for Deferred Rendering ─── */
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* ─── Atmospheric Section Effects ─── */
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-120px) translateX(var(--drift-x, 20px));
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes beam-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes neon-pulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-float-particle {
+  animation: float-particle var(--dur, 6s) ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+}
+
+.animate-beam-scan {
+  animation: beam-scan var(--dur, 8s) linear infinite;
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse var(--dur, 3s) ease-in-out infinite;
+}
+
+/* ─── Testimonials Marquee ─── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

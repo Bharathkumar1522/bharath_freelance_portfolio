@@ -159,8 +159,8 @@ export default function ProjectsSection() {
                 <h2 className="text-[12vw] md:text-8xl font-black font-heading text-white/5 uppercase tracking-tighter select-none absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
                     Projects
                 </h2>
-                <h2 className="text-4xl md:text-6xl font-black font-heading text-white uppercase tracking-tighter relative z-10">
-                    Featured Work
+                <h2 className="text-5xl md:text-7xl font-black font-heading text-white uppercase tracking-tighter relative z-10">
+                    Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-300 to-amber-400">Work</span>
                 </h2>
                 <p className="text-zinc-400 font-mono tracking-widest uppercase text-xs md:text-sm mt-4 relative z-10">
                     Selected Freelance & Production

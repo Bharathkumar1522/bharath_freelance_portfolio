@@ -1,26 +1,26 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import SkillsSection from "@/components/SkillsSection";
-import ServicesSection from "@/components/ServicesSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import JourneySection from "@/components/JourneySection";
-import CertificationsSection from "@/components/CertificationsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
+
+const SkillsSection = dynamic(() => import("@/components/SkillsSection"));
+const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
+const ProjectsSection = dynamic(() => import("@/components/ProjectsSection"));
+const JourneySection = dynamic(() => import("@/components/JourneySection"));
+const CertificationsSection = dynamic(() => import("@/components/CertificationsSection"));
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
+const ContactSection = dynamic(() => import("@/components/ContactSection"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (
     <main className="relative w-full">
       <Hero />
-      <SkillsSection />
       <ServicesSection />
+      <SkillsSection />
       <ProjectsSection />
       <JourneySection />
       <CertificationsSection />
       <TestimonialsSection />
-      <section id="contact">
-        <ContactSection />
-      </section>
+      <ContactSection />
 
       <Footer />
     </main>

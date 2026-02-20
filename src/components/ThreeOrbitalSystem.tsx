@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, Html, Text, Float, Stars, Trail, Sparkles } from "@react-three/drei";
+import { OrbitControls, Html, Stars, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 import { useSpring, animated } from "@react-spring/three";
 import { Hand } from "lucide-react";
@@ -26,6 +26,8 @@ interface OrbitCategory {
 interface ThreeOrbitalSystemProps {
     categories: OrbitCategory[];
     isVisible?: boolean;
+    activeCategory?: string | null;
+    onCategoryChange?: (id: string | null) => void;
 }
 
 // --- Components ---
@@ -192,7 +194,8 @@ function Scene({ categories, activeId, setActiveId, setHoveredId, isVisible }: {
             <pointLight position={[-10, -10, -5]} intensity={0.5} color="#4c8aff" />
 
             <group ref={starsRef}>
-                <Stars radius={100} depth={50} count={8000} factor={6} saturation={0} fade speed={1} />
+                {/* Adaptive star count: fewer on mobile saves significant GPU bandwidth */}
+                <Stars radius={100} depth={50} count={typeof window !== 'undefined' && window.innerWidth < 768 ? 2000 : 6000} factor={6} saturation={0} fade speed={0.8} />
             </group>
 
             {/* Shift Scene Position - Adjusted to prevent bottom clipping */}
@@ -254,22 +257,39 @@ function ResponsiveCamera() {
 
 // --- Main Component ---
 
-export default function ThreeOrbitalSystem({ categories, isVisible = true }: ThreeOrbitalSystemProps) {
-    const [activeCategory, setActiveCategory] = useState<string | null>(categories[0].id);
+export default function ThreeOrbitalSystem({ categories, isVisible = true, activeCategory: controlledActive, onCategoryChange }: ThreeOrbitalSystemProps) {
+    const [internalActive, setInternalActive] = useState<string | null>(categories[0].id);
     const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
     const [hasInteracted, setHasInteracted] = useState(false);
 
-    // Find active data to display in overlay
+    // Use controlled state if provided, otherwise fall back to internal
+    const activeCategory = controlledActive !== undefined ? controlledActive : internalActive;
+    const setActiveCategory = (id: string | null) => {
+        setInternalActive(id);
+        onCategoryChange?.(id);
+    };
+
     const activeData = categories.find(c => c.id === activeCategory);
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
     return (
         <div
             className="relative w-full h-full flex items-center justify-center"
+            style={{ touchAction: 'pan-y' }}
             onPointerDown={() => setHasInteracted(true)}
-            onTouchStart={() => setHasInteracted(true)}
         >
 
-            <Canvas className="z-10" dpr={[1, 1.5]} gl={{ antialias: true, powerPreference: "high-performance" }}>
+            <Canvas
+                className="z-10"
+                dpr={isMobile ? [1, 1] : [1, 1.5]}
+                frameloop="always"
+                gl={{
+                    antialias: !isMobile,
+                    powerPreference: "high-performance",
+                    alpha: false,
+                }}>
+
                 <ResponsiveCamera />
                 <Scene
                     categories={categories}
@@ -288,44 +308,7 @@ export default function ThreeOrbitalSystem({ categories, isVisible = true }: Thr
                 </div>
             )}
 
-            {/* Desktop Sidebar (unchanged) */}
-            {activeData && (
-                <div className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 w-80 p-6 rounded-xl border z-20 backdrop-blur-xl pointer-events-none md:pointer-events-auto"
-                    style={{
-                        borderColor: activeData.color,
-                        background: `linear-gradient(135deg, rgba(0,0,0,0.9), ${activeData.color}15)`,
-                        boxShadow: `0 0 50px -20px ${activeData.color}40`
-                    }}
-                >
-                    <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                                <activeData.icon className="w-6 h-6" style={{ color: activeData.color }} />
-                            </div>
-                            <div>
-                                <h3 className="text-2xl font-bold font-heading text-white uppercase tracking-wider glow-text">{activeData.label}</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="space-y-4">
-                        {activeData.skills.map((skill, idx) => (
-                            <div key={idx} className="space-y-1">
-                                <div className="flex justify-between items-center text-xs uppercase tracking-widest text-zinc-400">
-                                    <span>{skill.name}</span>
-                                    <span>{skill.level}%</span>
-                                </div>
-                                <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
-                                    <div
-                                        className="h-full rounded-full shadow-[0_0_10px_currentColor] transition-all duration-1000"
-                                        style={{ width: `${skill.level}%`, backgroundColor: activeData.color }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
+            {/* Desktop sidebar is now managed externally by DesktopSkillsList in SkillsSection */}
 
             {/* Mobile Bottom Sheet */}
             {activeData && (
