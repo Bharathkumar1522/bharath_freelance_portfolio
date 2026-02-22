@@ -10,7 +10,7 @@ export const portfolioData = {
         phone: "+919963085174",
         social: {
             linkedin: "https://www.linkedin.com/in/bharath-kumar-b9a380234/",
-            github: "https://github.com/bharathkumar-15",
+            github: "https://github.com/Bharathkumar1522",
             instagram: "https://www.instagram.com/code_sculpter?igsh=M3c5YnFnb2Z6ZnRl"
         },
         bestSkillOn: [
