@@ -102,6 +102,15 @@ export const portfolioData = {
 
     projects: [
         {
+            id: 7,
+            title: "The Safe Hive",
+            category: "Web Platform / Healthcare",
+            year: "2026",
+            image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1774431848/portfolio/Screenshot_2026-03-25_150208_hlbkto.png",
+            link: "https://thesafehive.com",
+            description: "Developed and launched The Safe Hive, a specialized web platform designed to help consumers navigate chemical safety in household and personal care products. The project focuses on bridging the gap between complex toxicological data and everyday consumer decisions through an evidence-based approach."
+        },
+        {
             id: 1,
             title: "Vivitaz Healthcare",
             category: "Healthcare Platform",
@@ -145,15 +154,6 @@ export const portfolioData = {
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1744453742/portfolio/Screenshot_2025-04-12_155848_hxsefg.png",
             link: "https://tasty-den-site.vercel.app/",
             description: "A commercially active restaurant website with a vibrant menu display and table reservation capabilities."
-        },
-        {
-            id: 6,
-            title: "Zentry-Inspired",
-            category: "Design Prototype",
-            year: "2023",
-            image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1744453636/portfolio/Screenshot_537_h3p9ec.png",
-            link: "https://awwwards-website-kappa.vercel.app/",
-            description: "An award-winning design implementation inspired by Zentry, featuring heavy scroll interactions and WebGL effects."
         }
     ],
 
