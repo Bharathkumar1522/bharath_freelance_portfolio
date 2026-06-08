@@ -102,6 +102,15 @@ export const portfolioData = {
 
     projects: [
         {
+            id: 8,
+            title: "Projx",
+            category: "Educational Projects Agency",
+            year: "2026",
+            image: "/projx.png",
+            link: "https://www.projx.it.com/",
+            description: "Designed and developed a modern, high-performance website for an agency that builds projects for students. Focused on delivering an attractive, fast, and user-friendly experience."
+        },
+        {
             id: 7,
             title: "The Safe Hive",
             category: "Web Platform / Healthcare",
@@ -134,17 +143,8 @@ export const portfolioData = {
             category: "Portfolio / Beauty",
             year: "2025",
             image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1770964303/portfolio/Screenshot_2025-12-16_115954_syld3j.png",
-            link: "https://themagictouchbybhavani.netlify.app/",
+            link: "https://bhavsbeautystudio.netlify.app/",
             description: "An elegant, visually rich portfolio for a Bridal Makeup Artist. Focused on high-quality gallery presentation and aesthetic appeal."
-        },
-        {
-            id: 4,
-            title: "Guggila Global Edu",
-            category: "Study Abroad",
-            year: "2025",
-            image: "https://res.cloudinary.com/dyecmgvcy/image/upload/v1770964303/portfolio/Screenshot_2025-12-16_120347_ocrafa.png",
-            link: "https://guggillaglobaledu.org/",
-            description: "A professional corporate website for an education consultancy, featuring automated lead capture and service detailing."
         },
         {
             id: 5,
