@@ -23,7 +23,6 @@ export const portfolioData = {
     skills: {
         core: [
             { name: "React", level: 95 },
-            { name: "TypeScript", level: 85 },
             { name: "Tailwind CSS", level: 100 },
             { name: "Framer Motion", level: 90 },
             { name: "Python", level: 80 },
